@@ -1,0 +1,80 @@
+
+
+<div class=" bg-white col-12">
+  <p class="fw-bold text-danger">Limited registration:</p>
+  <div class="d-flex col-12 p-2">
+    <select id="idevent" class="form__input me-3 bg-light">
+      <option ></option>
+      <% 
+      if(typeof deputyEvent !== 'undefined'){ 
+        deputyEvent.forEach(data =>{
+      %>
+      <option value="<%=data._id%>"><%=data.name%></option>
+      <%})}%>
+    </select>
+    <input id="time" type="datetime-local" class="form__input me-3 bg-light">
+    <div class="col-1">
+      <p onclick="limited()" class="btn btn-secondary">save</p>
+    </div>
+  </div>
+</div> <br>
+
+<script>
+  function limited(){
+                $.ajax({
+                    url : "/manage/registerEvent/limitedRegister",
+                    type : "post",
+                    dataType:"text",
+                    data : {
+                      idevent : $('#idevent').val(),
+                      time : $('#time').val()
+                    },
+                    success : function (result){
+                        alert(result)
+                    }
+                });
+            }
+</script>
+
+<div class=" bg-white col-12 shadow">
+    <div class="fw-bold card-header bg-white text-primary col-12 text-center fs-4"><i>MANAGE EVENT</i></div>
+    <div class="card-body">
+      <table class="table table-hover text-center">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Member</th>
+            <th scope="col">Fee</th>
+            <th scope="col">Start Day</th>
+            <th scope="col">End Day</th>
+            <th scope="col">Limited</th>
+          </tr>
+        </thead>
+        <% 
+        if(typeof deputyEvent !== 'undefined'){ 
+          var i = 1
+          var date = new Date('2021-12-12T06:29:32.555+00:00')
+          deputyEvent.forEach(data =>{
+      %>
+        <tbody>
+          <tr>
+            <th scope="row"><%=i%></th>
+            <td><%= data.name %></td>
+            <td><%= data.number %></td>
+            <td><%= data.fee %>.00 USD</td>
+            <td class="text-success"><%= moment(data.startday).format('Do/MM/YYYY (HH:mm:ss) ') %></td>
+            <td class="text-success"><%= moment(data.endday).format('Do/MM/YYYY (HH:mm:ss) ') %></td>
+            <% if( data.limitedRegister !== date){ %>
+              <td class="text-secondary"><%= moment(data.limitedRegister).format('Do/MM/YYYY (HH:mm:ss) ') %></td>
+            <% }else{ %>
+              <td class="text-danger">NOT FOUD</td>
+            <%}%>
+          </tr>         
+        </tbody>
+        <% i++})}else{ %>
+        <h4 class="text-center text-danger">EVENT NOT DATA !</h4>
+        <% } %>
+      </table>
+    </div>
+  </div>

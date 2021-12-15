@@ -1,0 +1,130 @@
+<% if(typeof user !== 'undefined'){ %>
+<div style="height: 100%; width: 410px;  background-color: #e6ecf0" class="ms-2 position-fixed" >
+  <div style="height: 420px;" class="bg-white m-3 rounded-3 col-11 ">
+    <div class="card-body">
+      <h5 class="card-title text-center border-bottom">Personal Information</h5>
+      <div class="d-flex mt-4">
+        <img class="rounded-pill me-2" width="50px" height="50px" src="<%=user.picture%>" alt="">
+        <span class="mt-3 col-9 text-center text-primary"><i><%=user.email%></i></span>
+      </div>
+      <div class="d-flex mt-4">
+        <span class="col-8 text-primary">Name: <i class="text-dark"><%=user.name%></i></span>
+        <span class="col-4 text-primary">Gender: <i class="text-dark"><%=user.gender%></i></span>
+      </div>
+      <div class="d-flex mt-3">
+        <span class="col-6 text-primary">Class: <i class="text-dark"><%= user.class %></i></span>
+        <span class="col-6 text-primary">Brithday: <i class="text-dark"><%= moment(user.birthday).format('Do-MM-YYYY') %></i></span>
+      </div>
+      <div class="d-flex mt-3">
+        <span class="col-6 text-primary">Mssv: <i class="text-dark"><%=user.mssv%></i></span>
+        <span class="col-6 text-primary">Phone: <i class="text-dark">0<%=user.phone%></i></span>
+      </div>
+      <div class="mt-4 text-primary">Address: <i class="text-dark"><%=user.address%></i></div>
+      <div class="btn mt-4 btn-danger col-12 text-center" data-bs-toggle="modal" data-bs-target="#updatepersonal"><i>UPDATE PERSONAL</i></div>
+    </div>
+  </div>
+  <div class="me-5 m-2 mt-5 text-end">
+    <a href="/pages/chat"><img width="60px" src="https://icon-library.com/images/chat-icon-png/chat-icon-png-22.jpg" alt=""></a>
+    <span class="position-absolute mt-2 translate-middle badge rounded-pill bg-danger">
+      99+
+    </span>
+  </div> 
+</div>
+<%}else{%>
+<div style="height: 100%; width: 410px;  background-color: #e6ecf0" class="ms-2 position-fixed" >
+  <img  src="/images/clb/clbcnttCTUT.jpg" alt="">
+</div>
+<%}%>
+<!-- ------------------------------------- -->
+<div class="modal fade mt-4" id="updatepersonal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content bg-light">
+      <div class="modal-header text-center">
+        <h5 class="modal-title text-center col-12"><i>UPDATE PERSONAL</i></h5>
+      </div>
+      <div class="modal-body ">
+        <%
+           if(typeof user !== 'undefined'){
+        %>
+        <form method="post" action="/pages/personal?id=<%=user._id%>">
+          <div class="d-flex">
+            <div class="col-6 p-3">
+              <div class="mb-3">
+                <label class="col-form-label">Mssv:</label>
+                <input name="mssv" type="number" class="form-control form__input bg-light">
+              </div>
+              <div class="mb-3">
+                <label class="col-form-label">Password:</label>
+                <input name="password" type="password" class="form-control form__input bg-light">
+              </div>
+              <div class="mb-3">
+                <label class="col-form-label">Class:</label>
+                <input name="class" type="text" class="form-control form__input bg-light">
+              </div>
+              <div class="mb-3">
+                <label class="col-form-label">Phone:</label>
+                <input name="phone" type="number" class="form-control form__input bg-light">
+              </div>
+            </div>
+            <div class="col-6 p-3">
+              <div class="mb-3">
+                <label class="col-form-label">Address:</label>
+                <input name="address" type="text" class="form-control form__input bg-light">
+              </div>
+              <div class="mb-3">
+                <label class="col-form-label">Birthday:</label>
+                <input name="birthday" type="date" class="form-control form__input bg-light">
+              </div>
+              <div class="mb-3">
+                <label class="col-form-label">Gender:</label>
+                <div class="form-check">
+                  <input name="gender" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="Nam" checked>
+                  <label class="form-check-label" for="exampleRadios1">
+                    Nam
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input name="gender" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Nữ">
+                  <label class="form-check-label" for="exampleRadios2">
+                    Nữ
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input name="gender" class="form-check-input" type="radio" name="exampleRadios" id="khac" value="Khác">
+                  <label class="form-check-label" for="khac">
+                    Khác
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary"><i>UPDATE</i></button>
+          </div>
+        </form>
+        <%}%>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .form__input{
+	width: 100%;
+	border:0px solid transparent;
+	border-radius: 0;
+	border-bottom: 1px solid #aaa;
+	padding: 1em .5em .5em;
+	padding-left: 2em;
+	outline:none;
+	margin:1.5em auto;
+	transition: all .5s ease;
+    margin-top: -5px;
+}
+.form__input:focus{
+	border-bottom-color: #008080;
+	box-shadow: 0 0 5px rgba(0,80,80,.4); 
+	border-radius: 4px;
+}
+</style>

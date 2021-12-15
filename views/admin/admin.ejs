@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('../block/head') %>
+    <link rel="stylesheet" href="/css/admin/mainleft.css">
+    <title>Express manage</title>
+</head>
+<body>
+    <%- include('./block/header') %>
+  <div class="bg-light" style="height: 130px;"></div>  
+  <div class="d-flex">
+    <div class="col-3">
+          <div class="sidenav col-3 border bg-primary">
+            <%  if(typeof user_manage !== 'undefined'){
+                  user_manage.join.forEach(val =>{
+                    if(val.role === '-7'){
+            %>
+            <a class="border-bottom bg-dark" data-toggle="collapse" href="#tc">Admin</a>
+            <a class="border-bottom" href="/manage/events"><i class="fa fa-gift" aria-hidden="true"></i>&nbsp;  Manage Events</a>
+            <a class="border-bottom" href="/manage/members/personCharge"><i class="fa fa-id-card" aria-hidden="true"></i>&nbsp;  Person In Charge</a>
+            <a class="border-bottom" href="#members" data-toggle="collapse"><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;  Manage Members</a>
+            <a href="/manage/members/member-register" class="border-bottom collapse" id="members">.member register</a>
+            <a href="/manage/members/" class="border-bottom collapse" id="members">.member</a>
+            <a href="/manage/members/active" class="border-bottom collapse" id="members">.active member</a>
+            <a class="border-bottom" href="/manage/members/sendmail"><i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;  Sent Email</a>
+            <a class="border-bottom" href="/manage/members/chat"><i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;  Manage Chat</a>
+            <% }else{ %>
+            <a class="border-bottom bg-secondary" data-toggle="collapse" href="#tc">Deputy</a>
+            <a class="border-bottom" href="/manage/registerEvent/events"><i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;  Manage Event</a>
+            <a class="border-bottom" href="/manage/registerEvent/Details"><i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;  Manage Details</a>
+            <a class="border-bottom" href="/manage/registerEvent/memberRegis"><i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;  Manage register event</a>
+            <a class="border-bottom" href="/manage/posts"><i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;  Manage Posts</a>
+            <% }})} %>
+
+
+          </div>
+    </div>
+    <div class="col-9 p-5" id="original">
+        <%- include(`./pages/${page}`) %>
+    </div>
+  </div>
+</body>
+ <%- include('../block/footer') %>
+</html>
+
+
+<!-- <script>
+      function chat(){
+                $.ajax({
+                    url : "/manage/members/chat",
+                    type : "get",
+                    contentType: "application / x-www-form-urlencoded; charset = UTF-8",
+                    success : function (data){
+                        $("#original").replaceWith(data)
+                    },
+                    error: (err)=>{
+                      console.log(err)
+                    }
+                });
+            }
+</script> -->
+
+
+

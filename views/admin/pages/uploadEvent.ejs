@@ -1,0 +1,65 @@
+<div class=" bg-light col-12 fst-italic shadow">
+    <div class="d-flex">
+        <div class="ms-">
+            <a href="/manage/events" class="btn-sm btn-primary me-2 rounded-circle">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+            </a>
+        </div>
+        <div class="fw-bold text-primary col-11 text-center ps-4">NEW WORK</div>
+    </div>
+    <div class="card-body">
+      <%
+           if(typeof data !== 'undefined'){
+      %>
+        <form action="/manage/events/up" method="post">
+            <div class="mb-3 ps-5 text-primary pe-5">
+              <label class="form-label">Name work</label>
+              <input name="name" type="text" class="form__input bg-light" value="<%=data.name%>">
+            </div>
+            <div class="mb-3 ps-5 text-primary pe-5">
+              <label class="form-label">Number of members</label>
+              <input name="number" type="number" class="form__input bg-light" value="<%=data.number%>">
+            </div>
+            <div class="mb-3 ps-5 text-primary pe-5">
+              <label class="form-label">Fee</label>
+              <input name="fee" type="number" class="form__input bg-light" value="<%=data.fee%>">
+            </div>
+            <div class="mb-3 ps-5 text-primary pe-5">
+              <label class="form-label">Limit age</label>
+              <select name="limitage" id="" class="form__input bg-light">
+                <option class="bg-danger" value="<%=data.limitAge%>">>&nbsp;<%=data.limitAge%></option>
+                <option value="3">> 3</option>
+                <option value="2">> 2</option>
+                <option value="1">> 1</option>
+              </select>
+            </div>
+            <div class="mb-3 ps-5 text-primary pe-5">
+              <label class="form-label">Start day</label>
+              <input name="startday" type="datetime-local" class="form__input bg-light" value="">
+            </div>
+            <div class="mb-3 ps-5 text-primary pe-5">
+              <label class="form-label">End day</label>
+              <input name="endday" type="datetime-local" class="form__input bg-light">
+            </div>
+            <input name="id" type="hidden" value="<%=data._id%>">
+            <!-- <input type="hidden" name="userPoster" value="61814b43f95e782137ba3f30"> -->
+            <div class="text-center">
+                <button type="submit" class="btn btn-danger">Save <i class="fa fa-check-circle-o" aria-hidden="true"></i></button>
+            </div>
+          </form>
+          <%}%>
+    </div>
+  </div>
+  <script src="/path/to/date-and-time.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,45 @@
+
+<div style="margin-top: 500px;" class="position-fixed col-6 text-end">
+  <a class="btn-light btn me-3 mt-3 " data-bs-toggle="modal" data-bs-target="#searchpostsmember">
+    <i class="fa fa-search text-danger"></i>
+  </a>
+</div>
+<%
+    if(typeof data !== 'undefined'){
+      data.forEach(val =>{
+        val.posts.forEach(value =>{
+          if(value.lenght !== 0){
+%>
+<div class="col-12 mt-3 p-5 bg-white shadow rounded-3">
+      <div class="row col-12">
+          <div class="col-1">
+            <img width="40px" class="rounded-circle" src="<%=val.picture%>" alt="">
+          </div>
+          <div class="col-6 fw-bold mt-2"><%=val.name%></div>
+          <div class="col-5 text-end mt-2"><i class="fa fa-clock-o" aria-hidden="true">&nbsp; <%=moment(value.dayPosts).format('Do MMMM YYYY HH:mm:ss')%></i></div>
+      </div> <br><br><br>
+      <div><%=value.content%></div>
+      <% value.image.forEach(row =>{ %>
+        <div class="col-11">
+          <img width="600px" src="/upload/<%=row.filename%>" alt="">
+        </div>
+      <% }) %>
+</div>
+<%}})})}%>
+
+<!-- Modal -->
+<div class="modal fade" id="searchpostsmember" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog bg-light">
+    <div class="modal-content">
+      <div class="text-end">
+        <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/pages/search/postsMembers" method="post">
+            <input name="key" type="search" class="form__input ms-3" placeholder="posts members...">
+            <button type="submit" class="btn btn-danger"><i class="fa fa-search"></i></button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

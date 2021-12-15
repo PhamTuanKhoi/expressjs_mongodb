@@ -1,0 +1,66 @@
+<% 
+if(typeof posts !== 'undefined'){ 
+  var i = 1
+  posts.forEach(val =>{
+    val.posts.forEach(row =>{
+%>
+<div class="col-12 mt-3 p-5 bg-white shadow rounded-3">
+  <div class="row col-12">
+    <div class="col-1">
+      <img width="40px" class="rounded-circle" src="https://khoakhcb.ctuet.edu.vn/wp-content/uploads/2020/06/Lo-go-%C4%91%E1%BA%A1i-h%E1%BB%8Dc.png" alt="">
+    </div>
+    <div class="col-6 fw-bold mt-2">Administration</div>
+    <div class="col-5 text-end mt-2"><i class="fa fa-clock-o" aria-hidden="true">&nbsp;<%=moment(row.dayPosts).format('Do MMMM YYYY HH:mm:ss')%></i></div>
+</div> 
+  <br><br><br>
+    <div class="col-12"><%- row.content %></div>
+    <div class="col-12 text-end">
+      <a href="/pages/event?slug=<%=val.slug%>" class="btn btn-success"><i class="fa fa-line-chart" aria-hidden="true">&nbsp;Sent Event</i></a>
+      <% if(typeof user !== 'undefined'){ %>
+      <div class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#saveeventPost<%=i%>">
+        <i class="fa fa-tags" aria-hidden="true">&nbsp;Event Register</i>
+      </div>
+      <% }else{ %>
+      <div class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#login">
+        <i class="fa fa-tags" aria-hidden="true">&nbsp;Event Register</i>
+      </div>
+      <% } %>
+    </div>
+    <!-- <input class="example1" type="text" value="<%=val._id%>"> -->
+  </div>
+  <%}) %>
+<!-- ---------------------------------------------------------------- -->
+<div class="modal fade" id="saveeventPost<%=i%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content bg-light">
+      <div class="modal-header">
+        <h5 class="modal-title text-center col-12"><i>Event Register</i></h5>
+      </div>
+      <div class="modal-body">
+        <form action="/pages/eventRegister" method="post">
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Mssv:</label>
+            <input name="mssv" type="text" class="form-control bg-light form__input" id="recipient-name">
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">Password:</label>
+            <input name="password" type="password" class="form-control bg-light form__input">
+          </div>
+          <input name="id" type="hidden" value="<%=val._id%>">
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-danger">Send</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<% i++})}%>
+  
+
+
+  
+
+
+  

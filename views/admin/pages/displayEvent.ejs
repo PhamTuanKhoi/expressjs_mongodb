@@ -1,0 +1,48 @@
+<div class=" bg-white col-12 shadow">
+    <div class="fw-bold card-header bg-white text-primary col-12 text-center fs-4"><i>MANAGE EVENT</i></div>
+    <div class="card-body">
+      <table class="table table-hover text-center">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Start Day</th>
+            <th scope="col">End Day</th>
+            <th scope="col">Number</th>
+            <th scope="col">Fee</th>
+            <th scope="col">Limited</th>
+            <th scope="col">Image</th>
+            <th scope="col">Edit</th>
+          </tr>
+        </thead>
+        <% 
+        if(typeof event !== 'undefined'){ 
+          var i = 1
+          event.forEach(data =>{
+      %>
+        <tbody>
+          <tr>
+            <th>
+              <a onclick="return option = confirm('Want to delete <%=data.slug%> ?')" href="/manage/events/delete?slug=<%=data.slug%>" class="text-danger "><i class="fa fa-times" aria-hidden="true"></i></a>
+            </th>
+            <th scope="row"><%=i%></th>
+            <td><%= data.name %></td>
+            <td><%= moment(data.startday).format('Do/MM/YYYY (hh:mm:ss)') %></td>
+            <td><%= moment(data.endday).format('Do/MM/YYYY (hh:mm:ss)') %></td>
+            <td><%=data.number%></td>
+            <td><%=data.fee%></td>
+            <td>> <%=data.limitAge%></td>
+            <td><img width="100px" src="/upload/<%=data.image%>" alt=""></td>
+            <td>
+              <a href="/manage/events/upload?slug=<%=data.slug%>" class="text-warning btn-sm btn-outline-light fs-4"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+            </td>
+          </tr>         
+        </tbody>
+        <% i++})}else{ %>
+        <h4 class="text-center text-danger">EVENT NOT DATA !</h4>
+        <% } %>
+      </table>
+      <a href="/manage/events/addEvent" class="btn btn-success btn-outline-light border-success text-white"><i class="fa fa-plus-square" aria-hidden="true"></i> &nbsp;ADD POSTS</a>
+    </div>
+  </div>

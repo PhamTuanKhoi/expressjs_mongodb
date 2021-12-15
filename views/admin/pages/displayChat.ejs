@@ -1,0 +1,30 @@
+<div class="col-12" style="margin-top: -30px;">
+<!-- <div class="col-6 text-center card-header text-primary fw-bold"><i>MANAGE GROUP CHAT</i></div> -->
+    <div style="margin-left: 15%;height: 550px;overflow: auto;" class="col-6 shadow p-3">
+        <p class="text-center fw-bold text-primary">MANAGE GROUP CHAT</p>
+        <% 
+        if(typeof chat !== 'undefined'){ 
+            chat.forEach(data =>{
+        %>
+        <div>
+            <div style="font-size: 15px;"><%=data.chat.user%></div>
+            <div>
+                <i style="font-size: 10px;font-style: italic;" class="fa fa-clock-o text-primary" aria-hidden="true">&nbsp;<%=moment(data.createdAt).format('Do/MM/YYYY (hh:mm:ss)')%></i>
+            </div>
+        </div>
+        <div class="text-end">
+            <span class="fst-italic message"><%=data.chat.message%> </span>
+        </div>
+        <% })} %>
+    </div>
+</div>
+
+<style>
+    .message{
+        border-bottom: 1px solid rebeccapurple;
+        border-radius: 10px;
+        padding: 10px;
+    }
+</style>
+
+

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('../block/head') %>
+    <title>Document</title>
+</head>
+<body class="bg-light">
+    <div class="col-4 bg-light shadow login">
+        <div class="text-center mb-3 pt-4">
+            <img src="/images/sv_logo_dashboard.png" alt="">
+        </div>
+        <form action="/manage/login" method="post">
+            <div class="mb-3 ps-5 pe-5">
+              <label for="user" class="form-label">Email address</label>
+              <input name="username" type="email" class="form__input bg-light" id="user">
+            </div>
+            <div class="ps-5 pe-5 ">
+              <label for="pass" class="form-label">Password</label>
+              <input name="password" type="password" class="form__input bg-light">
+            </div>
+            <div class="mb-3 ps-5 ms-4 p-3 form-check">
+              <input  type="checkbox" class="form-check-input" id="exampleCheck1">
+              <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            </div>
+            <button type="submit" class="btn text-white btn-success btn-outline-danger border-primary btn-login mb-4">Sign In</button>
+          </form>
+    </div>
+</body>
+<%- include('../block/footer') %>
+</html>
+<% if(typeof success !== 'undefined' && success === 'false'){ %>
+    <script>alert("Invalid email or password!")</script>
+<%}%>
+<% if(typeof success !== 'undefined' && success === 'No'){ %>
+    <script>alert("Your No Manage Event!")</script>
+<%}%>
+<style>
+    .login{
+        margin-left: 33%;
+        margin-top: 8%;
+    }
+    .btn-login{
+        margin-left: 10%;
+        width: 410px;
+    }
+
+.form__input{
+	width: 100%;
+	border:0px solid transparent;
+	border-radius: 0;
+	border-bottom: 1px solid #aaa;
+	padding: 1em .5em .5em;
+	padding-left: 2em;
+	outline:none;
+	margin:1.5em auto;
+	transition: all .5s ease;
+    margin-top: -5px;
+}
+.form__input:focus{
+	border-bottom-color: #008080;
+	box-shadow: 0 0 5px rgba(0,80,80,.4); 
+	border-radius: 4px;
+}
+
+</style>

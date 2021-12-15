@@ -1,0 +1,32 @@
+<div id="mySidenav" class="sidenav bg-primary">
+
+    <a class="border-bottom" data-toggle="collapse" href="#tc">About</a>
+    
+    <a class="border-bottom" href="#posts" data-toggle="collapse"><i class="fa fa-bookmark-o" aria-hidden="true"></i>&nbsp;Posts</i></a>
+    <a href="/pages/posts" class="border-bottom collapse bg-info" id="posts">&nbsp;
+      <i class="fa fa-bookm">&nbsp;.CLB is posts</i>
+    </a>
+    <a href="/pages/memberpost" class="border-bottom collapse bg-info" id="posts">&nbsp;
+      <i class="fa fa-bookm">&nbsp;.Member is posts</i>
+    </a>
+    <a class="border-bottom" href="/pages/home"><i class="fa fa-gift" aria-hidden="true">&nbsp;Event</i></a>
+    <a class="border-bottom" href="/pages/posting"><i class="fa fa-external-link" aria-hidden="true">&nbsp;Post an article</i></a>
+    <% if(typeof user !== 'undefined'){ %>
+      <a class="border-bottom" href="/pages/debt"><i class="fa fa-cc-diners-club" aria-hidden="true">&nbsp;student debt</i></a>
+    <% }else{ %>
+      <a class="border-bottom" href="#"><i class="fa fa-cc-diners-club" aria-hidden="true">&nbsp;student debt</i></a>
+    <% } %>
+    <a class="border-bottom" href="#"><i class="fa fa-users" aria-hidden="true">&nbsp;Members</i></a>
+</div>
+  
+  <!-- <script>
+  function openNav() {
+    document.getElementById("mySidenav").style.width = "17rem";
+    // document.getElementById("main").style.marginLeft = "350px";
+  }
+  
+  function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    // document.getElementById("main").style.marginLeft= "0";
+  }
+  </script> -->

@@ -1,0 +1,200 @@
+<div class="col-12 mt-3  row rounded-3">
+
+  <%
+if(typeof event !== 'undefined'){
+  var i = 1
+  var date = new Date().getFullYear()
+  var yestoday = new Date()
+  event.forEach(data => {
+    if( yestoday <= data.limitedRegister){
+%>
+<!-- bien dem -->
+<%
+var count = 0
+data.registerEvent.forEach(val =>{
+  if(val.pay === true){
+    count++
+  }
+})
+%>
+
+<div class="col-6">
+  <div class="shadow" >
+    <div style="height: 500px;" class="col-12 bo">
+        <div class="card-body">
+            <div class="img text-center">
+                <img width="345px" style="margin-left: -15px" src="/upload/<%=data.image%>" alt="">
+            </div>
+          <div class="card-title text-center mt-4">
+              <div class="fs-3 fw-bold text-primary"><%=data.name%></div>
+              <div class="fs-5 text-danger"><i class="fa fa-money fw-bold" aria-hidden="true">&nbsp;<%=data.fee%> USD</i></div>
+          </div>
+          <div class="date text-success">
+            <div class="text-center"><i class="fa fa-clock-o fw-bold" aria-hidden="true">&nbsp;1st 12/2021 15:23:50</i></div>
+            <div class="text-center"><i class="fa fa-clock-o fw-bold" aria-hidden="true">&nbsp;30st 12/2021 15:23:50</i></div>
+            <h5 class="text-center mt-3"><i class="fa fa-chevron-right text-secondary" aria-hidden="true"><%=data.limitAge%> year</i></h5>
+          </div>
+          <div class="card-register">
+            <div class="card-header bg-danger text-center">
+              <% if(typeof user !== 'undefined'){ %>
+                  <% 
+                  if (typeof user.birthday !== 'undefined') {
+                    var year = user.birthday.getFullYear();
+                  %>
+                  <% if( role_user >= 2 ){ %>  
+                        <% if( count < data.number ){ %>   
+                             <% if( data.limitAge === 3 ){ %>
+                                   <% if( date-year >= 20 ){ %>
+                                    <div class="open-AddBookDialog" data-bs-toggle="modal" data-bs-target="#saveevent<%=i%>">
+                                      <i class="fa fa-tags" aria-hidden="true">&nbsp;Event Register</i>
+                                    </div>
+                                   <% }else{ %>
+                                    <div class="open-AddBookDialog" onclick="alert('Bạn không đủ tuổi !');">
+                                      <i class="fa fa-tags" aria-hidden="true">&nbsp;Event Register</i>
+                                    </div>
+                                   <%}%>
+                             <% }else if ( data.limitAge === 2 ) { %>
+                                   <% if( date-year >= 19 ){ %>
+                                    <div class="open-AddBookDialog" data-bs-toggle="modal" data-bs-target="#saveevent<%=i%>">
+                                      <i class="fa fa-tags" aria-hidden="true">&nbsp;Event Register</i>
+                                    </div>
+                                   <% }else{ %>
+                                    <div class="open-AddBookDialog" onclick="alert('Bạn không đủ tuổi !');">
+                                      <i class="fa fa-tags" aria-hidden="true">&nbsp;Event Register</i>
+                                    </div>
+                                   <%}%>
+                             <% }else{ %>
+                                  <div class="open-AddBookDialog" data-bs-toggle="modal" data-bs-target="#saveevent<%=i%>">
+                                    <i class="fa fa-tags" aria-hidden="true">&nbsp;Event Register</i>
+                                  </div>
+                             <%}%>
+                        <%}else{%>  
+                          <div class="open-AddBookDialog" onclick="alert('Số lượng đăng ký đã đủ !');">
+                            <i class="fa fa-tags" aria-hidden="true">&nbsp;Event Register</i>
+                          </div>
+                        <%}%>
+                    <% }else{ %>
+                      <div class="open-AddBookDialog" onclick="alert('Bạn chưa phải là thành viên của câu lạc bộ !')">
+                        <i class="fa fa-tags" aria-hidden="true">&nbsp;Event Register</i>
+                      </div>  
+                    <%}%>       
+                  <% }else{ %>
+                    <div class="open-AddBookDialog" onclick="alert('Bạn cần cập nhật thông tin cá nhân !')">
+                        <i class="fa fa-tags" aria-hidden="true">&nbsp;Event Register</i>
+                      </div> 
+                    <%}%>
+              <% }else{ %>
+                  <div class="" data-bs-toggle="modal" data-bs-target="#login">
+                    <i class="fa fa-tags" aria-hidden="true">&nbsp;Event Register</i>
+                  </div>
+              <%}%>
+          </div>
+          </div> <br>
+          <div class="card-text text-center"><a href="/pages/view-details?slug=<%=data.slug%>" class="border-bottom border-3 border-primary">Click view details.</a></div>
+        </div>
+        <div class="card-footer bg-info">
+          <a href="/pages/post?slug=<%=data.slug%>" style="width: 142px;" class="mt-2 col-6">
+            <i class="fa fa-arrow-left text-dark" aria-hidden="true">&nbsp;Sent Posts</i>
+          </a>
+        </div>
+    </div>  
+  </div> <br>
+</div>
+<!-- --------------------------------- -->
+  
+  <!-- ---------------------------------------------------------------- -->
+<div class="modal fade" id="saveevent<%=i%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content bg-light">
+    <div class="modal-header">
+      <h5 class="modal-title text-center col-12"><i>Event Register</i></h5>
+    </div>
+    <div class="modal-body">
+      <form action="/pages/eventRegister" method="post">
+        <div class="mb-3">
+          <label class="col-form-label">Mssv:</label>
+          <% if(typeof user !== 'undefined'){ %>
+          <input name="mssv" type="text" class="form-control bg-light form__input text-primary" value="<%=user.mssv%>" readonly="false">
+          <% } %>
+        </div>
+        <div class="mb-3">
+          <label class="col-form-label">Password:</label>
+          <input name="password" type="password" class="form-control bg-light form__input">
+        </div>
+        <!-- <a href=""><%=data._id%></a> -->
+        <input name="id" type="hidden" value="<%=data._id%>">
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-danger">Send</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+<% i++ }})} %>
+</div>
+
+
+<% if(typeof save !== 'undefined' && save === 'true'){ %>
+  <script>alert('Đã thêm vào công nợ bạn cần thanh toán để hoàn thành!')</script>
+<%}%>
+<% if(typeof save !== 'undefined' && save === 'false'){ %>
+  <script>alert('* Bạn đã thêm trước đó !*')</script>
+<%}%>
+
+
+
+<style>
+  .bo:hover .img{
+      transform: translateY(-90px) rotate(-10deg);
+  }
+  .img{
+      transition: 1s;
+  }
+  .card-title{
+      transition: 1s;
+  }
+  .bo:hover .card-title{
+      transform: translateY(-75px) rotate(-5deg);
+  }
+  .card-footer{
+    visibility: hidden;
+  }
+  .bo:hover .card-footer{
+    visibility: visible;
+  }
+  .card-text{
+      margin-top: 150px;
+      visibility: hidden;
+      opacity: 0;
+      transition: 1s;
+  }
+  .bo:hover .card-text{
+      opacity: 100;
+      margin-top: -40px;
+      visibility: visible;
+      transform: rotate(-5deg);
+  }
+  .card-register{
+      margin-top: 150px;
+      visibility: hidden;
+      opacity: 0;
+      transition: 1s;
+  }
+  .bo:hover .card-register{
+      opacity: 100;
+      margin-top: -40px;
+      visibility: visible;
+      transform: translateY(-45px) rotate(-5deg);
+  }
+  .bo:hover .date{
+    opacity: 0;
+    transition: 1s;
+    visibility: hidden;
+  }
+  .date{
+    opacity: 100;
+  }
+
+</style>

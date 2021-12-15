@@ -1,0 +1,64 @@
+<div class="col-12 mt-3 p-5 bg-white shadow rounded-3">
+    <%
+        if(typeof viewdetails !== 'undefined'){
+            var date = new Date().getFullYear()
+            viewdetails.forEach(data =>{
+                data.details.forEach(value =>{
+
+    %>
+<!-- bien dem -->
+<%
+var count = 0
+data.registerEvent.forEach(val =>{
+  if(val.pay === true){
+    count++
+  }
+})
+%>
+<!-- - -->
+    <div class="fs-4 fw-bold text-center text-success">INFORMATION DETAILS</div>
+    <div class="mt-4 text-secondary"><%-value.content%></div>
+    <div class="text-primary ">
+        <p class="text-primary fw-bold">Thông tin chi tiết:</p>
+        <p>Tên hoạt động: <%=data.name%>.</p>
+        <p>Số lượng đã đăng ký: <%=count%>/<%=data.number%></p>  
+        <p>Phí: <%=data.fee%> USD.</p>
+        <p>Sinh viên tham dự từ năm <%=data.limitAge%> trở lên.</p>
+        <p>Ngày bắt đầu: <%=moment(data.startday).format('Do/MM/YYYY (HH:mm:ss)')%>.</p>
+        <p>Ngày kết thúc: <%=moment(data.endday).format('Do/MM/YYYY (HH:mm:ss)')%>.</p>
+    </div>
+    <div>
+        <div class="card-header text-center">Thông tin người phụ trách</div>
+        <table class="table bg-light text-center table-bordered ">
+            <thead>
+              <tr>
+                <td scope="col">name</td>
+                <td scope="col">Email</td>
+                <td scope="col">Phone</td>
+                <td scope="col">Age</td>
+                <td scope="col">Gender</td>
+              </tr>
+            </thead>
+            <tbody>
+                <% data.Con_user.forEach(row =>{ %>
+              <tr>
+                <td><%=row.name%></td>
+                <td><%=row.email%></td>
+              
+                <td>0<%=row.phone%></td>
+                <td><%=date - new Date(row.birthday).getFullYear()%></td> 
+                <td><%=row.gender%></td>
+              </tr>
+              <%})%>
+            </tbody>
+          </table>
+    </div>
+    
+<% })})} %>
+</div>
+
+ 
+
+
+
+

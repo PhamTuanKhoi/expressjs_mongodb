@@ -1,0 +1,83 @@
+<div class="bg-white p-3 shadow">
+  <div class="fw-bold card-header bg-white text-primary col-12 text-center fs-4"><i>Your debt</i></div>
+    <table class="table table-bordered text-center">
+        <thead>
+          <tr class="text-center">
+            <td scope="col"></td>
+            <td scope="col">Name word</td>
+            <td scope="col" width="120px">Start</td>
+            <td scope="col" width="120px">End</td>
+            <td scope="col">Debt</td>
+            <td scope="col">Status</td>
+          </tr>
+        </thead>
+        <tbody>
+        <%
+            if(typeof debt !== 'undefined'){
+              var i = 1
+                debt.forEach(val =>{
+        %>
+          <tr>
+            <td><%=i%></td>
+            <td><%=val.name%></td>
+
+            <!-- <% val.registerEvent.forEach(data =>{ %>
+              <% if(data.userid.equals(user._id)){ %>
+            <td><%=moment(data.dayRegister).format('Do-MM-YYYY (HH:mm:ss)')%></td>
+            <%}%>
+            <% }) %> -->
+            <td><%=moment(val.startday).format('Do/MM/YYYY (HH:mm:ss)')%></td>
+            <td><%=moment(val.endday).format('Do/MM/YYYY (HH:mm:ss)')%></td>
+
+                <% val.registerEvent.forEach(data =>{ %>
+                  <% if(data.userid.equals(user._id)){ %>
+                  <% if(data.pay !== true){ %>
+                    <td class="cart-row text-danger"><SPan class="cart-price"><%=val.fee%>.00</SPan> USD</td>
+                    <td class="text-danger">Chưa nộp</td>
+                  <% }else{ %>
+                    <td class="text-success"><SPan ><%=val.fee%>.00</SPan> USD</td>
+                    <td class="text-success">Đã nộp</td>
+                  <% } %>
+                  <% } %>
+                <% }) %>
+
+          </tr>
+        <% i++}) %>
+        <tr>
+          <td class=" text-center fw-bold " colspan="4">Total:</td>
+
+            <td style="padding-right: 130px;" class="cart-total-price text-danger fw-bold" colspan="2">---</td>
+          <!-- <td style="background: rgb(253, 236, 237);" class="text-danger">Chưa nộp</td> -->
+        </tr>
+        <%}%>
+        </tbody>
+      </table> 
+      <form action="pay" method="post">
+        <input type="hidden" id="domain" name="total" value=""/>
+        <input type="hidden" id="quantity" name="quantity" value=""/>
+        <button class="bg-white border-0" type="submit">Thanh Toán: <img width="80px" src="https://www.tecnoandroid.it/wp-content/uploads/2021/07/paypal.jpg" alt=""></button>
+      </form>
+</div>
+
+<% if(typeof pay !== 'undefined'){ %>
+  <script>alert('Thanh toán thành công!')</script>
+<% } %>
+
+<script>
+
+  var cart_rows = document.getElementsByClassName("cart-row");
+  var total = 0;
+  var count = 0
+  for (var i = 0; i < cart_rows.length; i++) {
+    var cart_row = cart_rows[i]
+    var price_item = cart_row.getElementsByClassName("cart-price ")[0]
+    var price = parseFloat(price_item.innerText)
+    total = total + price
+    count++
+  }
+  document.getElementsByClassName("cart-total-price")[0].innerText = total.toFixed(2) + ' USD'
+  let domain = total.toFixed(2);
+  document.getElementById('domain').value = domain;
+  document.getElementById('quantity').value = count
+
+</script>

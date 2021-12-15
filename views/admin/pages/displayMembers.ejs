@@ -1,0 +1,45 @@
+<div class=" bg-white col-12 shadow">
+    <div class="fw-bold pt-3 bg-white text-primary col-12 text-center fs-4"><i>MEMBERS</i></div>
+    <div class="card-body">
+      <table class="table table-hover table-bordered text-center">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col" width="150px">Name</th>
+            <th scope="col">Mssv</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Birthday</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Address</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <% 
+        if(typeof data !== 'undefined'){ 
+            var i = 1;
+          data.forEach(val =>{
+      %>
+        <tbody>
+          <tr>
+            <th scope="row"><%=i%></th>
+            <td><%= val.name %></td>
+            <td><%= val.mssv %></td>
+            <td><%= val.email %></td>
+            <td>0<%= val.phone%></td>
+            <td><%= moment(val.birthday).format('Do/MM/YYYY')%></td>
+            <td><%= val.gender %></td>
+            <td><%= val.address %></td>
+            <td>
+                <div class="d-flex">
+                    <a href="" class="text-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                </div>
+            </td>
+          </tr>         
+        </tbody>
+        <% i++})}else{ %>
+        <h4 class="text-center text-danger">MEMBERS NOT DATA !</h4>
+        <% } %>
+      </table>
+    </div>
+  </div>

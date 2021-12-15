@@ -1,0 +1,99 @@
+
+
+<div style="margin-top: -40px;" class="shadow col-12">
+    <div class="col-12 fs-2 text-white text-center bg-secondary">Send Email</div>
+    <div class="col-12 row">
+        <div class="col-4 pt-1">
+            <p class="btn btn-danger col-12" onclick="chatarray()">Send all group</p>
+            <p class="btn btn-danger col-12" onclick="chatevent()">Send event</p>
+            <p class="btn btn-danger col-12" onclick=" chatsingle()">Sent single</p>
+        </div>
+        <div class="col-8 pt-1">
+            <div class="col-12 border-bottom fw-bole text-white text-center bg-primary rounded-pill">Thư mới</div>
+            <div id="content" class="mt-1">
+                <input type="text" class="form__input fst-italic" value="Tất cả thành viên.">
+                <input id="themeall" type="text" class="form__input" placeholder="Chủ đề:">
+                <textarea id="contentall" class="form__input" cols="30" rows="10" placeholder="Nội dung:"></textarea>
+                <div class="text-end">
+                    <a onclick="sendall()" class="btn btn-primary">Send <i class="fa fa-paper-plane-o" aria-hidden="true"></i></a>
+                </div>
+            </div>
+            <div id="content2" class="mt-1">
+                <select id="id" class="form__input">
+                    <option >---</option>
+                <% 
+                    if(typeof data !== 'undefined'){ 
+                        data.forEach(val =>{
+                %>
+                    <option value="<%=val._id%>"><%=val.name%></option>
+                <% })} %>
+                </select>
+                <input id="themeevent" type="text" class="form__input" placeholder="Chủ đề:">
+                <textarea id="contentevent" class="form__input" cols="30" rows="10" placeholder="Nội dung:"></textarea>
+                <div class="text-end">
+                    <a onclick="sendevent()" class="btn btn-primary">Send <i class="fa fa-paper-plane-o" aria-hidden="true"></i></a>
+                </div>
+            </div>
+            <div id="content1">
+                say hi <a href="https://freetuts.net" title="học lập trình">freetuts.net</a>
+            </div>
+            <br/>
+        </div>
+    </div>
+</div>
+<script>
+    function sendall(){
+                $.ajax({
+                    url : "/manage/members/sendall",
+                    type : "post",
+                    dataType:"text",
+                    data : {
+                         themeall : $('#themeall').val(),
+                         contentall : $('#contentall').val()
+                    },
+                    success : function (result){
+                        alert(result)
+                    }
+                });
+            }
+    function sendevent(){
+                $.ajax({
+                    url : "/manage/members/sendevent",
+                    type : "post",
+                    dataType:"text",
+                    data : {
+                         themeevent : $('#themeevent').val(),
+                         contentevent : $('#contentevent').val(),
+                         id : $('#id').val()
+                    },
+                    success : function (result){
+                        alert(result)
+                    }
+                });
+            }
+</script>
+
+<script language="javascript">
+
+    document.getElementById("content2").style.display = 'none';
+    document.getElementById("content1").style.display = 'none';
+    document.getElementById("content").style.display = 'none';
+
+    function chatsingle() {
+        document.getElementById("content1").style.display = 'block';
+        document.getElementById("content").style.display = 'none';
+        document.getElementById("content2").style.display = 'none';
+    };
+
+    function chatarray () {
+        document.getElementById("content").style.display = 'block';
+        document.getElementById("content1").style.display = 'none';
+        document.getElementById("content2").style.display = 'none';
+    };
+    function chatevent () {
+        document.getElementById("content2").style.display = 'block';
+        document.getElementById("content").style.display = 'none';
+        document.getElementById("content1").style.display = 'none';
+    };
+
+</script>

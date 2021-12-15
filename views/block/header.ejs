@@ -1,0 +1,203 @@
+<nav style="width: 100%;" class=" shadow bg-white position-fixed">
+    <div class="row">
+      <div class="col-12 fs-5 text-uppercase bg-primary fw-bold d-flex text-white p-3 justify-content-center">Information Technology Club</div>
+
+        <div class="col-6 d-flex justify-content-center">
+          <img class="pe-5" src="/images/sv_logo_dashboard.png">
+          <form class="mt-1" action="/pages/search" method="post">
+            <div class="input-group border rounded-pill p-1">
+              <input name="key" autocomplete="off" type="search" placeholder="search event..."  class="search"  onkeyup="creatdb(this)">
+              <div class="input-group-prepend border-0">
+                <button type="submit" class="btn text-info"><i class="fa fa-search"></i></button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+<style>
+  .search{
+    border: none;
+  }
+  .search:focus{
+    outline: none;
+  }
+</style>
+        <div class="col-6  justify-content-center d-flex p-3">
+          <a class="me-5" href=""><i class="fa fa-home" aria-hidden="true">Trang chủ</i></a>
+          <div class=" d-flex">
+            <% if(typeof user === 'undefined'){ %>
+              <a href=""class="ps-2 me-5" data-bs-toggle="modal" data-bs-target="#login">
+                <i class="fa fa-user-circle" aria-hidden="true"> Login</i>
+              </a>
+              <% }else{ %>
+              <img width="25px" height="25px" src="<%= user.picture %>" class="rounded-pill">
+    
+              <div class="dropdown me-5">
+                <a class="ms-2 dropdown-toggle fst-italic"id="menu1" data-toggle="dropdown"><%= user.name %></a>
+                <ul class="dropdown-menu text-center mt-4" style="margin-left: -20px;"  role="menu" aria-labelledby="menu1">
+                  <a onclick="return option = confirm('Want to sign out of your account ?')" href="/pages/eventout" >
+                    <i class="fa fa-power-off text-warning" aria-hidden="true"></i>&nbsp;Sign out
+                  </a>
+                </ul>
+              </div>
+              <% } %>
+          </div>
+          <a class="col-2 position-relative"data-bs-toggle="modal" data-bs-target="#thongbaoclient"><i class="fa fa-bell-o " aria-hidden="true"></i>
+            <span class="position-absolute mb-2 translate-middle badge rounded-pill bg-danger">
+              0+
+            </span>
+          </a>
+          <% if(typeof user !== 'undefined'){ %>
+          <% 
+              user.join.forEach(val => {
+                if( val.role === '0' ){ 
+          %>
+          <a href="/pages/join" class="ms-5 border-bottom border-primary border-2 text-end col-3">
+            <i class="fa fa-users" aria-hidden="true"></i>&nbsp;<i>join group</i>
+          </a>
+          <% }else if( val.role === '1' ){ %>
+            <a  class="ms-5 border-bottom border-primary border-2 text-end col-3">
+              <i class="fa fa-users" aria-hidden="true"></i>&nbsp;<i>Request sent</i>
+            </a>
+          <% }else{ %>
+            <a  class="ms-5 border-bottom border-dark border-2 text-dark text-end col-3">
+              <i class="fa fa-users" aria-hidden="true"></i>&nbsp;<i>Thành viên</i>
+            </a>
+          <% }}) %>
+
+          <% } %>
+        </div>
+      </div>
+
+    </div>
+  </nav>
+  <!-- goi y -->
+  <div id="searchrsl" class="search-prev col-7 fw-bold bg-white position-fixed" id="search-items">
+  </div>  
+
+<style>
+  .search-prev  a{
+    padding-left: 140px;
+    display: block;
+  }
+  .search-prev{
+    margin-top: 118px;
+    margin-left: 288px;
+  }
+</style>
+<!-- modal login -->
+<div class="modal fade" id="login" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-light">
+      <div class="modal-header row col-12">
+        <p class="col-1"></p>
+        <h5 class="modal-title text-center col-10"><i>Sign In</i></h5>
+        <a href="" class="col-1"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></a>
+      </div>
+      <div class="modal-body">
+        <form action="/pages/login_mssv" method="post">
+          <div class="mb-3">
+            <label class="col-form-label">Mssv:</label>
+            <input name="mssv" type="text" class="form-control bg-light form__input">
+          </div>
+          <div class="mb-3">
+            <label class="col-form-label">Password:</label>
+            <input name="password" type="password" class="form-control bg-light form__input">
+          </div>
+          <div class="col-12 text-center">
+            <button type="submit" class="btn btn-danger text-white col-9 fw-bold btn-outline-secondary">Send</button>
+          </div>
+        </form> <br>
+         <div class="d-flex">
+           <div class="text-primary me-4">Login with student account:</div>
+           <div class="g-signin2" data-onsuccess="onSignIn" data-width="120"></div>
+         </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal thongbao -->
+<div class="modal fade" id="thongbaoclient" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content bg-light">
+      <div class="modal-header">
+        <h5 class="modal-title text-center col-11 ms-3"><i>Your inform </i><i class="fa fa-bell-o " aria-hidden="true"></i></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <% 
+            if(typeof user !== 'undefined'){
+              user.join.forEach(val =>{
+                if(val.role === '2'){
+        %>
+        <div class="d-flex p-2 border-bottom">
+          <img width="30px" height="30px" class="rounded-circle" src="https://khoakhcb.ctuet.edu.vn/wp-content/uploads/2020/06/Lo-go-%C4%91%E1%BA%A1i-h%E1%BB%8Dc.png">
+          <div class="ms-3">
+            <i class="text-primary fw-bold">CLB CNTT</i>&nbsp; <br> Hi!&nbsp;<%=user.name%>
+            <i class="fa fa-check-circle-o" aria-hidden="true">&nbsp;Yêu cầu tham gia câu lạc bộ CNTT CTUT của bạn đã dược duyệt!&nbsp;
+              <i class="fa fa-clock-o" aria-hidden="true">&nbsp;<%=moment(val.joinday).format('Do MMMM YYYY HH:mm:ss')%></i>
+            </i>
+          </div>
+        </div>
+        <%}})}%>
+        <div style="height: 500px;"></div>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  function onSignIn(googleUser) {
+  var profile = googleUser.getBasicProfile();
+  var id_token = googleUser.getAuthResponse().id_token;
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', '/pages/login');
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.onload = function() {
+    console.log('Signed in as: ' + xhr.responseText);
+  };
+  xhr.send(JSON.stringify({token:id_token}));
+  var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+}
+</script>
+
+<script>
+  function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+  }
+</script>
+<style>
+  a{
+    text-decoration: none;
+  }
+</style>
+
+<!-- search ajax -->
+<script>
+  function creatdb(e){
+    const search_rs = document.getElementById('searchrsl')
+    fetch('/pages/search_event',{
+      method: "post",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({payload: e.value})
+    }).then(res => res.json()).then(data =>{
+      let payload = data.payload
+      search_rs.innerHTML = '';
+      if(payload.length < 1){
+        search_rs.innerHTML = '<p> data not found. </p>'
+      }
+      payload.forEach((item, index) => {
+         search_rs.innerHTML += `<a href="/pages/search_slug/${item.slug}">${item.name}</a><hr>`
+      });
+      return;
+    })
+  }
+</script>
+

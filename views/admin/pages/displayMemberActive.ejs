@@ -1,0 +1,46 @@
+<div class=" bg-white col-12 shadow">
+    <div class="fw-bold card-header bg-white text-primary col-12 text-center fs-4"><i>Active Member</i></div>
+    <div class="card-body">
+      <table class="table table-hover text-center">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Mssv</th>
+            <th scope="col">Age</th>
+            <th scope="col">Participated</th>
+          </tr>
+        </thead>
+        <% 
+        if(typeof active !== 'undefined'){ 
+          var date = new Date().getFullYear()
+          var i = 1
+          active.forEach(data =>{
+      %>
+        <tbody>
+          <tr>
+
+            <th>
+              <a href="" class="text-danger "><i class="fa fa-times" aria-hidden="true"></i></a>
+            </th>
+            <th scope="row"><%=i%></th>
+            <td><%=data.name%></td>      
+            <td><%=data.mssv%></td>      
+            <td><%=date - new Date(data.birthday).getFullYear()%></td>   
+            <% data.join.forEach(val =>{ %>   
+            <td><%=val.role - 2%></td>     
+            <%})%> 
+            <td>
+              <a href="/manage/events/upload?slug=<%=data.slug%>" class="text-warning btn-sm btn-outline-light fs-4"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+            </td>
+
+          </tr>         
+        </tbody>
+        <% i++})}else{ %>
+        <h4 class="text-center text-danger">EVENT NOT DATA !</h4>
+        <% } %>
+      </table>
+      <!-- <a href="/manage/events/addEvent" class="btn btn-success btn-outline-light border-success text-white"><i class="fa fa-plus-square" aria-hidden="true"></i> &nbsp;ADD POSTS</a> -->
+    </div>
+  </div>

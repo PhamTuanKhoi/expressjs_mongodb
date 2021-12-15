@@ -1,0 +1,110 @@
+<div class=" bg-light col-12 fst-italic shadow">
+    <div class="d-flex">
+        <div class="ms-">
+            <a href="/manage/events/personCharge" class="btn-sm btn-primary me-2 rounded-circle">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+            </a>
+        </div>
+        <div class="fw-bold text-primary col-11 text-center ps-4">NEW PERSON IN CHARGE</div>
+    </div>
+    <div class="card-body">
+        <form action="/manage/events/savePerson" method="post">
+          <div class="d-flex">
+            <div class="col-6">
+              <div class="mb-3 ps-5 text-primary pe-5">
+                <label class="form-label">Name:</label>
+                <input name="name" type="text" onkeyup="personcharge(this)" autocomplete="no" class="form-control bg-light form__input" placeholder="search name">
+                <div id="searchrsl" class="p-5"></div>
+              </div>
+              <div class="mb-3 ps-5 text-primary pe-5">
+                <label class="form-label">Mssv:</label>
+                <input id="mssv" type="text" class="form-control bg-light form__input"placeholder="no search">
+              </div>
+              <div class="mb-3 ps-5 text-primary pe-5">
+                <label class="form-label">Email:</label>
+                <input id="email" type="email" class="form-control bg-light form__input"placeholder="no search">
+              </div>
+              <div class="mb-3 ps-5 text-primary pe-5">
+                <label class="form-label">Phone:</label>
+                <input id="phone" type="number" class="form-control bg-light form__input"placeholder="no search">
+              </div>
+            </div>
+            <div class="col-6 mt-4">
+              <div class="mb-3 ps-5 text-primary pe-5">
+                <label class="form-label">Birth Day:</label>
+                <input id="birthday" type="text" class="form-control bg-light form__input"placeholder="no search">
+              </div>
+              <div class="mb-3 ps-5 text-primary pe-5">
+                <label class="form-label">Address:</label>
+                <input id="address" type="text" class="form-control bg-light form__input"placeholder="no search">
+              </div>
+              <div class="mb-3 ps-5 text-primary pe-5">
+                <label class="form-label">Gender:</label>
+                <input id="gender" type="text" class="form-control bg-light form__input"placeholder="no search">
+              </div>
+              <div class="mb-3 ps-5 mt-4 text-primary pe-5">
+                <label class="form-label">Choose event:</label>
+                <select name="id" class="form-control bg-light">
+                  <option class=""><i class="fa fa-caret-down" aria-hidden="true">_____</i></option>
+                <%
+                   if(typeof event !== 'undefined'){
+                     event.forEach(val =>{ 
+                %>
+                  <option value="<%=val._id%>"><%=val.name%></option>
+                <% })} %>
+              </select>
+              </div>
+            </div>
+          </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-danger">Save <i class="fa fa-check-circle-o" aria-hidden="true"></i></button>
+            </div>
+          </form>
+    </div>
+  </div>
+
+  <script>
+    function personcharge(e){
+      const search_rs = document.getElementById('searchrsl')
+      const mssv = document.getElementById('mssv')
+      const email = document.getElementById('email')
+      const phone = document.getElementById('phone')
+      const birthday = document.getElementById('birthday')
+      const address = document.getElementById('address')
+      const gender = document.getElementById('gender')
+      fetch('/manage/members/keyupPerson',{
+        method: "post",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({payload: e.value})
+      }).then(res => res.json()).then(data =>{
+        let payload = data.payload
+        search_rs.innerHTML = '';
+        if(payload.length < 1){
+          search_rs.innerHTML = '<p> err not found. </p>'
+        }
+        // khuc nay ne
+        payload.forEach((item, index) => {
+          if(index > 0) search_rs.innerHTML += '<hr>'
+          search_rs.innerHTML += `<a class="elemment" id="a${index}">${item.name}</a>`
+          mssv.value = item.mssv
+          email.value = item.email
+          phone.value = item.phone
+          birthday.value = item.birthday
+          address.value = item.address
+          gender.value = item.gender
+        });
+      })
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+

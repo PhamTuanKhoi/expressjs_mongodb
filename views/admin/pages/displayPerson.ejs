@@ -1,0 +1,85 @@
+
+     <%
+          if(typeof eventCharge !== 'undefined'){
+            var i = 1
+            var date = new Date().getFullYear()
+            eventCharge.forEach(val =>{
+     %>
+<div class=" bg-white col-12 shadow">
+  <div class="fw-bold card-header bg-white text-danger fs-5 col-12 text-center"><i><%=val.name%></i></div>
+    <div class="card-body">
+      <table class="table table-hover text-center">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">STT</th>
+            <th scope="col">name</th>
+            <th scope="col">Mssv</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Age</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Edit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%
+             val.Con_user.forEach(person =>{
+          %>
+          <tr>
+            <th>
+              <a href="" class="text-danger "><i class="fa fa-times" aria-hidden="true"></i></a>
+            </th>
+            <th scope="row">1</th>
+            <td><%=person.name%></td>
+            <td><%=person.mssv%></td>
+            <td><%=person.email%></td>
+            <td>0<%=person.phone%></td>
+            <td><%=date - new Date(person.birthday).getFullYear()%></td> 
+            <td><%=person.gender%></td>
+            <td>
+              <a href="" class="text-warning btn-sm btn-outline-light  fs-4"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      <div class="d-flex">
+        <!-- href="/manage/events/addPerson" -->
+        <a onclick="addPerson()" class="col-2 text-success">
+          <i class="fa fa-plus-square" aria-hidden="true">&nbsp;ADD PERSON</i>
+        </a>
+        <div class="col-10 text-end text-primary">MANAGE PERSON IN CHARGE</div>
+      </div>
+      <div class="mt-2 col-12">
+        <form action="/manage/members/addPerson" method="post">
+          <input name="id_event" type="hidden" value="<%=val._id%>">
+          <div class="col-12 justify-content-center d-flex">
+            <div class="col-6">
+              <select name="id_user" class="form__input">
+                <%  if( typeof userCharge !== 'undefined' ){
+                      userCharge.forEach(data =>{ 
+                %>
+                <option value="<%=data._id%>"><%=data.name%></option>
+                <% })} %>
+              </select>
+            </div>
+            <button style="height: 40px;" type="submit" class="btn btn-secondary">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div> <br> <br>
+  <% i++})}else{ %>
+    <h4 class="text-danger col-12 text-center">Person in charge no data!</h4>
+  <% } %>
+
+  <script>
+
+        // document.getElementById("addPerson").style.display = 'none';
+
+        function addPerson() {
+            document.getElementById("addPerson").style.display = 'block';
+        };
+  </script>
+

@@ -1,0 +1,20 @@
+<a href="/manage/posts/addPost" style="position: fixed;" class="btn btn-light ">ADD POSTS</a>
+
+<%
+    if(typeof data !== 'undefined'){
+      data.forEach(val =>{
+        val.posts.forEach(value =>{
+%>
+    <div class="col-12 mt-3 p-5 bg-white shadow rounded-3">
+        <div class="col-12 row">
+            <div class="col-1"></div>
+            <div class="fs-4 fw-bold text-center text-success col-10">Posts</div>
+            <div class="col-1 text-end">
+              <a href="/manage/posts/upload?id=<%=value._id%>"><i class="fa fa-pencil text-success" aria-hidden="true"></i></a>
+              <a onclick="return option = confirm('Want to delete posts <%=val.slug%> ?')" href="/manage/posts/deletePosts?idevent=<%=val._id%>&idposts=<%=value._id%>"><i class="fa fa-trash text-dark" aria-hidden="true"></i></a>
+            </div>
+        </div>
+        <div class="mt-4 text-secondary"><%-value.content%></div>
+        <div class="text-end text-info" style="font-size: 12px;"><%=val.name%></div>
+    </div>
+<% })})} %>

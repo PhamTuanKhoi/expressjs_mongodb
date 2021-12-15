@@ -1,0 +1,58 @@
+<% 
+    if(typeof eventPerson !== 'undefined'){
+        eventPerson.forEach(val =>{
+%>
+<div class=" bg-white col-12 shadow">
+    <div class="fw-bold card-header bg-white text-primary col-12 text-center fs-4"><i>Register Member <%=val.name%></i></div>
+    <div class="card-body">
+        <table class="table text-center">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">name</th>
+                <th scope="col">Mssv</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Age</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+                <% 
+                if(typeof eventRegis !== 'undefined'){
+                    var i = 1
+                    var date = new Date().getFullYear()
+                    eventRegis.forEach(data =>{
+                        if(data.name === val.name){
+                            data.Con_user.forEach(value =>{ 
+            %>
+            <tr>
+                <th scope="row"><%=i%></th>
+                <td><%=value.name%></td>
+                <td><%=value.mssv%></td>
+                <td><%=value.email%></td>
+                <td>0<%=value.phone%></td>
+                <td><%=date - new Date(value.birthday).getFullYear()%></td> 
+                <td><%=value.gender%></td>
+                    <% 
+                    data.registerEvent.forEach(debt =>{
+                        if(debt.userid.equals(value._id)){
+                    %>
+                    <% if(debt.pay === true){ %>
+                    <td class="fw-bold text-success">Đã nộp</td>
+                    <% }else if(debt.pay === false){ %>
+                    <td class="fw-bold text-danger">Chưa nộp</td>
+                    <% }else if(typeof debt === 'undefined'){ %>
+                      <td class="fw-bold bg-danger">fraud</td>
+                    <%}}})%>
+
+              </tr>        
+            <% i++})}})} %>
+            </tbody>
+          </table>
+    </div>
+</div> <br> <br>
+<% })} %>
+
+

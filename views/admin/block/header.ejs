@@ -1,0 +1,96 @@
+<nav style="width: 100%;" class=" shadow bg-white position-fixed">
+    <div class="row">
+      <div class="col-12 fs-5 text-uppercase bg-primary fw-bold d-flex text-white p-3 justify-content-center">Information Technology Club</div>
+
+        <div class="col-6 d-flex justify-content-center">
+          <img class="pe-5" src="/images/sv_logo_dashboard.png">
+          <form class="mt-1" action="">
+            <div class="input-group border rounded-pill p-1">
+              <input type="search" placeholder="Tìm kiếm..." aria-describedby="button-addon4" class="form-control bg-none border-0">
+              <div class="input-group-prepend border-0">
+                <button id="button-addon4" type="button" class="btn btn-link text-info"><i class="fa fa-search"></i></button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="col-6  justify-content-center d-flex p-3">
+          <a class="me-5" href=""><i class="fa fa-home" aria-hidden="true">Trang chủ</i></a>
+          <a class="me-5 position-relative"data-bs-toggle="modal" data-bs-target="#thongbao"><i class="fa fa-bell-o " aria-hidden="true"></i>
+            <% 
+            if( typeof role !== 'undefined' ){ 
+              role.forEach(users =>{
+          %>
+            <span class="position-absolute mb-2 translate-middle badge rounded-pill bg-danger">
+              <%= users.lenght %>
+            </span>
+            <% })} %>
+          </a>
+        
+          <!-- ///////// -->
+          <% if(typeof user_manage !== 'undefined'){ %>
+          <img width="25px" height="25px" src="<%=user_manage.picture%>" class="rounded-pill">
+          <a class="ps-2" ><i><%=user_manage.name%></i></a>
+          <% } %>
+
+          <a onclick="return option = confirm('Want to sign out of your account ?')" href="/manage/isloguot" class="ms-5">
+            <i class="fa fa-power-off text-warning" aria-hidden="true"></i>&nbsp;Sign out</a>
+
+        </div>
+      </div>
+
+    </div>
+  </nav>
+
+
+<!-- Modal -->
+<div class="modal fade" id="thongbao" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content bg-light">
+      <div class="modal-header">
+        <h5 class="modal-title text-center col-11 ms-3"><i>Notification </i><i class="fa fa-bell-o " aria-hidden="true"></i></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <% 
+            if( typeof role !== 'undefined' ){ 
+              role.forEach(val =>{
+        %>
+        <div class="d-flex p-2 border-bottom">
+          <img width="30px" height="30px" class="rounded-circle" src="<%=val.picture%>">
+          <div class="ms-3">
+            <% val.join.forEach(day =>{ %>
+            <i class="text-primary fw-bold"><%=val.name%></i>&nbsp;
+            <i class="me-5">đã gửi yêu cầu tham gia nhóm&nbsp;
+              <i class="fa fa-clock-o" aria-hidden="true">&nbsp;<%=moment(day.joinday).format('Do MMMM YYYY HH:mm:ss')%></i>
+            </i>
+            <a href="/manage/members/agree?id=<%=val._id%>" class="btn btn-primary"><i>Xác Nhận</i></a>
+            <%})%>
+          </div>
+        </div>
+        <%})}%>
+        <% 
+            if( typeof roleTV !== 'undefined' ){ 
+              roleTV.forEach(val =>{
+                val.join.forEach(data =>{
+                  if(data.role === '2'){
+        %>
+        <div class="d-flex p-2 border-bottom">
+          <img width="30px" height="30px" class="rounded-circle" src="<%=val.picture%>">
+          <div class="ms-3">
+            <i class="text-primary fw-bold"><%=val.name%></i>&nbsp;
+            <i class="me-5">đã gửi yêu cầu tham gia nhóm&nbsp;
+              <i class="fa fa-clock-o" aria-hidden="true">&nbsp;<%=moment(data.joinday).format('Do MMMM YYYY HH:mm:ss')%></i>
+            </i>
+            <a class="text-secondary"><i class="fa fa-check-circle-o" aria-hidden="true">&nbsp;Đã xác Nhận</i></a>
+          </div>
+        </div>
+        <%}})})}%>
+        <div style="height: 500px;"></div>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+

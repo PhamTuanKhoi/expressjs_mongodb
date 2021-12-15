@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="69765497701-7q8o9gks2brq1k3a9mb777unonen03c6.apps.googleusercontent.com">
+    <link rel="stylesheet" href="/css/client/outline.css">
+    <%- include('../block/head') %>
+    <title>Expressjs</title>
+  </head>
+<body class="">
+       <%- include('../block/header') %>
+      <!-- Modal -->
+      <div class="">
+        <div class="bg-light" style="height: 120px;"></div>  
+      </div>
+          
+      <div class="row">
+        <div style="width: 18rem;"></div>
+         <div style="width: 18rem;position: fixed;">
+            <%- include('./block/outlineleft') %>
+        </div>
+
+        <div class="col-6 mt-3 ms-5">
+            <%- include(`./pages/${page}`) %>
+        </div>
+        
+        <div style="width: 18rem;">
+            <%- include('./block/mainright') %>
+      </div>
+    </div>
+    
+</body>
+       <%- include('../block/footer') %>
+</html>
+
+<style>
+  .form__input{
+	width: 75%;
+	border:0px solid transparent;
+	border-radius: 0;
+	border-bottom: 1px solid #aaa;
+	padding: 1em .5em .5em;
+	/* padding-left: 2em; */
+	outline:none;
+	margin:1.5em auto;
+	transition: all .5s ease;
+    margin-top: -5px;
+}
+.form__input:focus{
+	border-bottom-color: #008080;
+	box-shadow: 0 0 5px rgba(0,80,80,.4); 
+	border-radius: 4px;
+}
+</style>
+
