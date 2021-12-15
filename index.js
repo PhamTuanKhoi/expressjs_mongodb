@@ -92,57 +92,7 @@ app.post('/upload',multipartMiddleware,(req,res)=>{
 appRouter(app)
 
 
-// let Event = require('./models/eventModel')
-// let path = require('path')
-// app.get('/search', (req, res)=>{
-//     res.render(path.join(__dirname, 'total'))
-// })
 
-
-// app.post('/creatkey', async (req, res)=>{
-//   var key = req.body.payload.trim()
-//   var search = await Event.find({ name: {
-//     $regex: new RegExp('^'+ key + '.*', 'i')  
-//   }})
-//   res.send({payload: search})
-// })
-
-
-// Event.find({"registerEvent.userid":'61974e27011c9d1716722d06'}, (err, data)=>{
-//   data.forEach(val =>{
-//     val.registerEvent.forEach(row=>{
-//       console.log(row.pay)
-//     })
-//   })
-// })
-
-
-
-
-
-
-// app.get('/menu', function(req, res){
-//     var cap1 = Event.aggregate([{
-//         $lookup:{     // trong excel tim kiem
-//             from:"account", //from2
-//             localField:"personCharge",
-//             foreignField:"_id",   //id cap2
-//             as:"Con" 
-//         }       
-//     }],function(err, data){
-//         if (err) {
-//             res.send('fail')
-//         }else{
-//             res.json(data)
-//         }
-//     })
-// })
-
-// app.get('/delete', (req, res)=>{
-//   Event.updateOne({_id: '61ae1c9bc5d02e5f1808e95a'}, {$pull:{personCharge: '61a9c84697a9ca12069e062d'}})
-//   .then(()=> console.log('ok'))
-//   .catch(err => console.log(err))
-// })
 
 
 
