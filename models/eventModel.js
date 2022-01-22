@@ -13,7 +13,7 @@ const eventchema = new Schema({
     startday: Date,
     endday: Date,
     image: String,
-    limitedRegister: {type: Date, default: new Date('2099-12-12T06:29:32.555+00:00')},
+    limitedRegister: {type: Date, default: new Date('1000-12-12T06:29:32.555+00:00')},
     details: [{
         userid: ObjectId,
         content: Array,
@@ -36,6 +36,7 @@ const eventchema = new Schema({
         dayPerson: {type: Date, default: Date.now()}
     }],
     personCharge_look: [ ObjectId ],
+    chat: [Object],
     slug: { type: String, slug: "name", unique: true }
 },
 {

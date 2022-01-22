@@ -1,8 +1,10 @@
 <% if(typeof user !== 'undefined' && role_user > 2 ){ %>
-  <div class="shadow">
+  <div class="shadow bg-light border">
     <div data-bs-toggle="modal" data-bs-target="#exampleModal">
-      <div class="col-12 text-center fs-3 bg-info">Miêu tả cảm nghĩ của bạn...</div>
-    <img height="250px" class="col-12" src="https://niemvuilaptrinh.ams3.cdn.digitaloceanspaces.com/upload-file/Upload%20File%20Button%20HTML%20CSS.png" alt="">
+      <div class="col-12 text-center fs-3">Miêu tả cảm nghĩ của bạn...</div>
+      <div style="height:250px" class="text-center">
+        <img width="140px" class="mt-5" src="https://cdn.picpng.com/icon/upload-files-icon-66764.png" alt="">
+      </div>
     </div>
   </div>
   <!-- ------------------ -->
@@ -65,17 +67,21 @@
     </div>
   </div>
   <% }else if( typeof user !== 'undefined' && role_user <= 2 ){ %>
-    <div class="shadow">
+    <div class="shadow bg-light border">
       <div data-bs-toggle="modal" onclick="alert('Bạn phải là thành viên hoạt động năng nổ !')">
-        <div class="col-12 text-center fs-3 bg-info">Miêu tả cảm nghĩ của bạn...</div>
-        <img height="250px" class="col-12" src="https://niemvuilaptrinh.ams3.cdn.digitaloceanspaces.com/upload-file/Upload%20File%20Button%20HTML%20CSS.png" alt="">
+        <div class="col-12 text-center fs-3">Miêu tả cảm nghĩ của bạn...</div>
+        <div style="height:250px" class="text-center">
+          <img width="140px" class="mt-5" src="https://cdn.picpng.com/icon/upload-files-icon-66764.png" alt="">
+        </div>
       </div>
     </div>
   <%}else{%>
-    <div class="shadow">
+    <div class="shadow bg-light border">
       <div data-bs-toggle="modal" data-bs-target="#login">
-        <div class="col-12 text-center fs-3 bg-info">Miêu tả cảm nghĩ của bạn...</div>
-        <img height="250px" class="col-12" src="https://niemvuilaptrinh.ams3.cdn.digitaloceanspaces.com/upload-file/Upload%20File%20Button%20HTML%20CSS.png" alt="">
+        <div class="col-12 text-center fs-3">Miêu tả cảm nghĩ của bạn...</div>
+        <div style="height:250px" class="text-center">
+          <img width="140px" class="mt-5" src="https://cdn.picpng.com/icon/upload-files-icon-66764.png" alt="">
+        </div>
       </div>
     </div>
   <%}%>

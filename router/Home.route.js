@@ -6,6 +6,8 @@ const APIGgController = require('../controllers/_APIGgController')
 
 
 
+router.get('/members',  HomeController.members)
+router.get('/chat/eventsign',  HomeController.eventsign)
 router.get('/view-details',  HomeController.viewdetails)
 router.post('/search/postsMembers',  HomeController.searchMember)
 router.get('/search_slug/:slug',  HomeController.search_slug)

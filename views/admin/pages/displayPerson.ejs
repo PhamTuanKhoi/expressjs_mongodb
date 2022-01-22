@@ -19,7 +19,6 @@
             <th scope="col">Phone</th>
             <th scope="col">Age</th>
             <th scope="col">Gender</th>
-            <th scope="col">Edit</th>
           </tr>
         </thead>
         <tbody>
@@ -28,7 +27,7 @@
           %>
           <tr>
             <th>
-              <a href="" class="text-danger "><i class="fa fa-times" aria-hidden="true"></i></a>
+              <a onclick="return option = confirm('You want delete <%=val.name%> ?')" href="/manage/members/delete-person?iduser=<%=person._id%>&idevent=<%=val._id%>" class="text-danger "><i class="fa fa-times" aria-hidden="true"></i></a>
             </th>
             <th scope="row">1</th>
             <td><%=person.name%></td>
@@ -37,26 +36,24 @@
             <td>0<%=person.phone%></td>
             <td><%=date - new Date(person.birthday).getFullYear()%></td> 
             <td><%=person.gender%></td>
-            <td>
-              <a href="" class="text-warning btn-sm btn-outline-light  fs-4"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-            </td>
           </tr>
           <% }) %>
         </tbody>
       </table>
       <div class="d-flex">
         <!-- href="/manage/events/addPerson" -->
-        <a onclick="addPerson()" class="col-2 text-success">
-          <i class="fa fa-plus-square" aria-hidden="true">&nbsp;ADD PERSON</i>
+        <a id="clickperson" class="col-2 text-success">
+          <!-- <i style="font-size:13px" class="fa fa-plus-square" aria-hidden="true">&nbsp;ADD PERSON</i> -->
         </a>
-        <div class="col-10 text-end text-primary">MANAGE PERSON IN CHARGE</div>
+        <div style="font-size:13px;" class="col-10 text-end text-success fst-italic fw-bold">Người Phụ Trách</div>
       </div>
-      <div class="mt-2 col-12">
-        <form action="/manage/members/addPerson" method="post">
+      <div id="addPerson<%=i%>" class="mt-2 col-12 add-person"> 
+        <form style="margin-left: -300px;" action="/manage/members/addPerson" method="post">
           <input name="id_event" type="hidden" value="<%=val._id%>">
           <div class="col-12 justify-content-center d-flex">
             <div class="col-6">
               <select name="id_user" class="form__input">
+                <option value=""></option>
                 <%  if( typeof userCharge !== 'undefined' ){
                       userCharge.forEach(data =>{ 
                 %>
@@ -64,7 +61,7 @@
                 <% })} %>
               </select>
             </div>
-            <button style="height: 40px;" type="submit" class="btn btn-secondary">Save</button>
+            <button style="height: 40px;" type="submit" class="btn btn-light text-primary">Save</button>
           </div>
         </form>
       </div>
@@ -74,12 +71,28 @@
     <h4 class="text-danger col-12 text-center">Person in charge no data!</h4>
   <% } %>
 
+
+  <style>
+    .add-person{
+      /* display: none; */
+    }
+  </style>
   <script>
 
-        // document.getElementById("addPerson").style.display = 'none';
+        
+        // var clickperson = document.querySelectorAll("#clickperson")
+        // for (var i = 1; i < clickperson.length; i++) {
+        //   var person = document.querySelector(`#addPerson${i}`)
+          
+        //   clickperson[i].onclick = function(e){
+        //     person.style.display = 'block'
+        //   }
+        // }
 
-        function addPerson() {
-            document.getElementById("addPerson").style.display = 'block';
-        };
+        
+
+        // function addPerson() {
+        //     document.getElementById("addPerson").style.display = 'block';
+        // };
   </script>
 

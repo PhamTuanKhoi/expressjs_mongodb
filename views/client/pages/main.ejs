@@ -15,8 +15,12 @@ if(typeof posts !== 'undefined'){
   <br><br><br>
     <div class="col-12"><%- row.content %></div>
     <div class="col-12 text-end">
-      <a href="/pages/event?slug=<%=val.slug%>" class="btn btn-success"><i class="fa fa-line-chart" aria-hidden="true">&nbsp;Sent Event</i></a>
-      <% if(typeof user !== 'undefined'){ %>
+      <a href="/pages/event?slug=<%=val.slug%>" class="btn btn-light btn-outline-info border-light">
+        <i class="text-primary fw-bold">Sent Event</i>
+        <i class="fa fa-arrow-circle-right text-primary fw-bold" aria-hidden="true"></i>
+        <!-- <i class="fa fa-line-chart" aria-hidden="true">&nbsp;Sent Event</i> -->
+      </a>
+      <!-- <% if(typeof user !== 'undefined'){ %>
       <div class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#saveeventPost<%=i%>">
         <i class="fa fa-tags" aria-hidden="true">&nbsp;Event Register</i>
       </div>
@@ -24,13 +28,13 @@ if(typeof posts !== 'undefined'){
       <div class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#login">
         <i class="fa fa-tags" aria-hidden="true">&nbsp;Event Register</i>
       </div>
-      <% } %>
+      <% } %> -->
     </div>
     <!-- <input class="example1" type="text" value="<%=val._id%>"> -->
   </div>
   <%}) %>
 <!-- ---------------------------------------------------------------- -->
-<div class="modal fade" id="saveeventPost<%=i%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="saveeventPost<%=i%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content bg-light">
       <div class="modal-header">
@@ -55,7 +59,7 @@ if(typeof posts !== 'undefined'){
       </div>
     </div>
   </div>
-</div>
+</div> -->
 <% i++})}%>
   
 

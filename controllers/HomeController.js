@@ -6,6 +6,12 @@ const multer = require('multer')
 var paypal = require('paypal-rest-sdk');
 const { findOne } = require('../models/accountModel')
 
+const express = require('express')
+const http = require('http');
+const server = http.createServer(express());
+const { Server } = require("socket.io");
+const io = new Server(server);
+
 class HomeController{
     async login_mssv(req, res){
         var body = req.body
@@ -274,6 +280,19 @@ class HomeController{
             }       
         }, {$match:{slug: req.query.slug}}])
         res.render('client/home', {page:'viewdetails', viewdetails})
+    }
+    async eventsign(req, res){
+        io.on('connection', (socket) => {
+            socket.on('du-hoc-germany', (msg) => {
+                io.emit('chatmessage', msg);
+              });
+          });
+        var eventchat = await Event.findOne({slug: req.query.slug})
+        res.render('client/home', {page: 'chatEvent', eventchat})
+    }
+    async members(req, res){
+        var members = await Account.find()
+        res.render('client/home', { page: "member", members })
     }
 }
 module.exports = new HomeController;

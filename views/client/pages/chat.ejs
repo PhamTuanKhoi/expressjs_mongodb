@@ -1,17 +1,37 @@
-<div class="col-12 p-2 bg-white shadow rounded-3">
-    <div class="col-12 text-center bg-light text-primary fw-bold"><i>GROUP CHAT</i></div>
-    <div class="scroll">
-        <ul id="messages">
-        </ul>
+
+
+<div class="col-12 bg-white shadow rounded-3 row">
+    <div class="col-4" style="background-color:rgb(29, 163, 163)">
+        <br>
+        <a href="/pages/chat">
+            <p class="btn fw-bold text-secondary col-12" style="background-color: rgb(161, 228, 200);">Tất cả thành viên</p>
+        </a>
+        <%
+     if(typeof eventsign !== 'undefined'){ 
+         eventsign.forEach(data =>{
+             data.registerEvent.forEach(val =>{
+                 if(val.userid.equals(user._id) && val.pay === true){
+        %>
+        <a href="/pages/chat/eventsign?slug=<%=data.slug%>">
+            <p id="show" class="btn fw-bold text-secondary col-12" style="background-color: rgb(161, 228, 200);"><%=data.name%></p>
+        </a>
+        <%}})})}%>
     </div>
-    <form id="chat_form">
-        <% if(typeof user !== 'undefined'){ %>
-        <input id="chatname" type="hidden" value="<%=user.name%>">
-      <input  class="bg-light form__input" id="chat_mes" type="text" placeholder="enter a message..." autocomplete="off">
-      <button class="btn btn-danger" id="send-chat">Send</button>
-      <% } %>
-  </form>
-  </div>
+    <div class="col-8">
+        <div class="col-12 text-center text-light fw-bold" style="background-color:rgb(29, 163, 163)"><i>GROUP CHAT</i></div>
+        <div class="scroll">
+            <ul id="messages">
+            </ul>
+        </div>
+        <form id="chat_form">
+            <% if(typeof user !== 'undefined'){ %>
+            <input id="chatname" type="hidden" value="<%=user.name%>">
+          <input  class="inputchat" id="chat_mes" type="text" placeholder="enter a message..." autocomplete="off" size="40">
+          <button class="btn btn-danger rounded-circle" id="send-chat">Send</button>
+          <% } %>
+      </form>
+    </div>
+</div>
   
 <script src="/socket.io/socket.io.js"></script>
 <script>
@@ -58,25 +78,4 @@
         diplaychat.appendChild(chatitem)
     })
   </script>
-  <style>
-      .sendchat{
-          background: #333; border: none; padding: 0 1rem; margin: 0.25rem; border-radius: 3px; outline: none; color: #fff;
-      }
-      #messages { list-style-type: none; margin: 0; padding: 0; }
-      #messages > li { padding: 0.5rem 1rem; text-align: end; font-style: italic; border-bottom: 1px solid rgb(196, 195, 199);
-                       border-radius: 30px;
-                       width: 25rem;
-                       margin-left: 40%;
-                       color: rgb(132, 63, 196);
-                     }
-      #messages > li:nth-child(odd) { background: #efefef; }
-      #messages > i {
-          color: black;
-          font-weight: 500;
-          margin-left: 6px;
-      }
-      .scroll{
-          height: 490px;
-          overflow-y: scroll;
-      }
-    </style>
+  

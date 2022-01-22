@@ -1,6 +1,6 @@
 <nav style="width: 100%;" class=" shadow bg-white position-fixed">
     <div class="row">
-      <div class="col-12 fs-5 text-uppercase bg-primary fw-bold d-flex text-white p-3 justify-content-center">Information Technology Club</div>
+      <div class="col-12 fs-5 text-uppercase bg-primary fw-bold d-flex text-white p-3 justify-content-center tieude">Câu Lạc Bộ Công Nghệ Thông Tin</div>
 
         <div class="col-6 d-flex justify-content-center">
           <img class="pe-5" src="/images/sv_logo_dashboard.png">
@@ -20,6 +20,9 @@
   }
   .search:focus{
     outline: none;
+  }
+  .tieude{
+    background-image: url(https://img.lovepik.com/photo/50087/1871.jpg_wh860.jpg);
   }
 </style>
         <div class="col-6  justify-content-center d-flex p-3">
@@ -44,20 +47,20 @@
           </div>
           <a class="col-2 position-relative"data-bs-toggle="modal" data-bs-target="#thongbaoclient"><i class="fa fa-bell-o " aria-hidden="true"></i>
             <span class="position-absolute mb-2 translate-middle badge rounded-pill bg-danger">
-              0+
+              +
             </span>
           </a>
           <% if(typeof user !== 'undefined'){ %>
           <% 
               user.join.forEach(val => {
-                if( val.role === '0' ){ 
+                if( val.role === 0 ){ 
           %>
           <a href="/pages/join" class="ms-5 border-bottom border-primary border-2 text-end col-3">
-            <i class="fa fa-users" aria-hidden="true"></i>&nbsp;<i>join group</i>
+            <i class="fa fa-users" aria-hidden="true"></i>&nbsp;<i>Tham gia nhóm</i>
           </a>
-          <% }else if( val.role === '1' ){ %>
+          <% }else if( val.role === 1 ){ %>
             <a  class="ms-5 border-bottom border-primary border-2 text-end col-3">
-              <i class="fa fa-users" aria-hidden="true"></i>&nbsp;<i>Request sent</i>
+              <i class="fa fa-users" aria-hidden="true"></i>&nbsp;<i>Đã gửi yêu cầu</i>
             </a>
           <% }else{ %>
             <a  class="ms-5 border-bottom border-dark border-2 text-dark text-end col-3">
@@ -91,7 +94,7 @@
     <div class="modal-content bg-light">
       <div class="modal-header row col-12">
         <p class="col-1"></p>
-        <h5 class="modal-title text-center col-10"><i>Sign In</i></h5>
+        <h5 class="modal-title text-center col-10"><i>Đăng nhập</i></h5>
         <a href="" class="col-1"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></a>
       </div>
       <div class="modal-body">
@@ -101,15 +104,15 @@
             <input name="mssv" type="text" class="form-control bg-light form__input">
           </div>
           <div class="mb-3">
-            <label class="col-form-label">Password:</label>
+            <label class="col-form-label">Mật khẩu:</label>
             <input name="password" type="password" class="form-control bg-light form__input">
           </div>
           <div class="col-12 text-center">
-            <button type="submit" class="btn btn-danger text-white col-9 fw-bold btn-outline-secondary">Send</button>
+            <button type="submit" class="btn btn-danger text-white col-9 fw-bold btn-outline-secondary">Xác nhận</button>
           </div>
         </form> <br>
          <div class="d-flex">
-           <div class="text-primary me-4">Login with student account:</div>
+           <div class="text-primary me-4">Đăng nhập bằng tài khoản sinh viên:</div>
            <div class="g-signin2" data-onsuccess="onSignIn" data-width="120"></div>
          </div>
       </div>
@@ -128,7 +131,7 @@
         <% 
             if(typeof user !== 'undefined'){
               user.join.forEach(val =>{
-                if(val.role === '2'){
+                if(val.role >= 2){
         %>
         <div class="d-flex p-2 border-bottom">
           <img width="30px" height="30px" class="rounded-circle" src="https://khoakhcb.ctuet.edu.vn/wp-content/uploads/2020/06/Lo-go-%C4%91%E1%BA%A1i-h%E1%BB%8Dc.png">

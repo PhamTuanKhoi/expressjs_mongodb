@@ -19,7 +19,7 @@ data.registerEvent.forEach(val =>{
 %>
 
 <div class="col-6">
-  <div class="shadow" >
+  <div class="shadow">
     <div style="height: 500px;" class="col-12 bo">
         <div class="card-body">
             <div class="img text-center">
@@ -32,7 +32,7 @@ data.registerEvent.forEach(val =>{
           <div class="date text-success">
             <div class="text-center"><i class="fa fa-clock-o fw-bold" aria-hidden="true">&nbsp;1st 12/2021 15:23:50</i></div>
             <div class="text-center"><i class="fa fa-clock-o fw-bold" aria-hidden="true">&nbsp;30st 12/2021 15:23:50</i></div>
-            <h5 class="text-center mt-3"><i class="fa fa-chevron-right text-secondary" aria-hidden="true"><%=data.limitAge%> year</i></h5>
+            <h5 class="text-center mt-3"><i class="fa fa-chevron-right text-secondary" aria-hidden="true"><%=data.limitAge%> năm</i></h5>
           </div>
           <div class="card-register">
             <div class="card-header bg-danger text-center">
@@ -46,55 +46,55 @@ data.registerEvent.forEach(val =>{
                              <% if( data.limitAge === 3 ){ %>
                                    <% if( date-year >= 20 ){ %>
                                     <div class="open-AddBookDialog" data-bs-toggle="modal" data-bs-target="#saveevent<%=i%>">
-                                      <i class="fa fa-tags" aria-hidden="true">&nbsp;Event Register</i>
+                                      <i class="fa fa-tags" aria-hidden="true">&nbsp;Click đăng ký</i>
                                     </div>
                                    <% }else{ %>
                                     <div class="open-AddBookDialog" onclick="alert('Bạn không đủ tuổi !');">
-                                      <i class="fa fa-tags" aria-hidden="true">&nbsp;Event Register</i>
+                                      <i class="fa fa-tags" aria-hidden="true">&nbsp;Click đăng ký</i>
                                     </div>
                                    <%}%>
                              <% }else if ( data.limitAge === 2 ) { %>
                                    <% if( date-year >= 19 ){ %>
                                     <div class="open-AddBookDialog" data-bs-toggle="modal" data-bs-target="#saveevent<%=i%>">
-                                      <i class="fa fa-tags" aria-hidden="true">&nbsp;Event Register</i>
+                                      <i class="fa fa-tags" aria-hidden="true">&nbsp;Click đăng ký</i>
                                     </div>
                                    <% }else{ %>
                                     <div class="open-AddBookDialog" onclick="alert('Bạn không đủ tuổi !');">
-                                      <i class="fa fa-tags" aria-hidden="true">&nbsp;Event Register</i>
+                                      <i class="fa fa-tags" aria-hidden="true">&nbsp;Click đăng ký</i>
                                     </div>
                                    <%}%>
                              <% }else{ %>
                                   <div class="open-AddBookDialog" data-bs-toggle="modal" data-bs-target="#saveevent<%=i%>">
-                                    <i class="fa fa-tags" aria-hidden="true">&nbsp;Event Register</i>
+                                    <i class="fa fa-tags" aria-hidden="true">&nbsp;Click đăng ký</i>
                                   </div>
                              <%}%>
                         <%}else{%>  
                           <div class="open-AddBookDialog" onclick="alert('Số lượng đăng ký đã đủ !');">
-                            <i class="fa fa-tags" aria-hidden="true">&nbsp;Event Register</i>
+                            <i class="fa fa-tags" aria-hidden="true">&nbsp;Click đăng ký</i>
                           </div>
                         <%}%>
                     <% }else{ %>
                       <div class="open-AddBookDialog" onclick="alert('Bạn chưa phải là thành viên của câu lạc bộ !')">
-                        <i class="fa fa-tags" aria-hidden="true">&nbsp;Event Register</i>
+                        <i class="fa fa-tags" aria-hidden="true">&nbsp;Click đăng ký</i>
                       </div>  
                     <%}%>       
                   <% }else{ %>
                     <div class="open-AddBookDialog" onclick="alert('Bạn cần cập nhật thông tin cá nhân !')">
-                        <i class="fa fa-tags" aria-hidden="true">&nbsp;Event Register</i>
+                        <i class="fa fa-tags" aria-hidden="true">&nbsp;Click đăng ký</i>
                       </div> 
                     <%}%>
               <% }else{ %>
                   <div class="" data-bs-toggle="modal" data-bs-target="#login">
-                    <i class="fa fa-tags" aria-hidden="true">&nbsp;Event Register</i>
+                    <i class="fa fa-tags" aria-hidden="true">&nbsp;Click đăng ký</i>
                   </div>
               <%}%>
           </div>
           </div> <br>
-          <div class="card-text text-center"><a href="/pages/view-details?slug=<%=data.slug%>" class="border-bottom border-3 border-primary">Click view details.</a></div>
+          <div class="card-text text-center"><a href="/pages/view-details?slug=<%=data.slug%>" class="border-bottom border-3 border-primary">Click xem chi tiết.</a></div>
         </div>
         <div class="card-footer bg-info">
           <a href="/pages/post?slug=<%=data.slug%>" style="width: 142px;" class="mt-2 col-6">
-            <i class="fa fa-arrow-left text-dark" aria-hidden="true">&nbsp;Sent Posts</i>
+            <i class="fa fa-arrow-left text-dark" aria-hidden="true">&nbsp;Click xem bài viết.</i>
           </a>
         </div>
     </div>  
@@ -107,7 +107,7 @@ data.registerEvent.forEach(val =>{
 <div class="modal-dialog">
   <div class="modal-content bg-light">
     <div class="modal-header">
-      <h5 class="modal-title text-center col-12"><i>Event Register</i></h5>
+      <h5 class="modal-title text-center col-12"><i>Đăng Ký</i></h5>
     </div>
     <div class="modal-body">
       <form action="/pages/eventRegister" method="post">
@@ -118,14 +118,14 @@ data.registerEvent.forEach(val =>{
           <% } %>
         </div>
         <div class="mb-3">
-          <label class="col-form-label">Password:</label>
+          <label class="col-form-label">Mật khẩu:</label>
           <input name="password" type="password" class="form-control bg-light form__input">
         </div>
         <!-- <a href=""><%=data._id%></a> -->
         <input name="id" type="hidden" value="<%=data._id%>">
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-danger">Send</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+          <button type="submit" class="btn btn-danger">Gửi</button>
         </div>
       </form>
     </div>

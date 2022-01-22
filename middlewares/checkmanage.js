@@ -8,7 +8,7 @@ module.exports.checkadmin = async(req, res, next) => {
     var data = jwt.verify(token, process.env.passtoken);     
     var user_manage = await account.findOne({_id: data.id})
     user_manage.join.forEach(val =>{
-      if(val.role === '-7'){
+      if(val.role === -7){
         res.locals.user_manage = user_manage
       }else{
         res.redirect('/manage/registerEvent/events')
@@ -16,6 +16,7 @@ module.exports.checkadmin = async(req, res, next) => {
     })
   }else{
     res.redirect('/manage/login')
+    return true;
   } 
   next()
 }
@@ -26,15 +27,15 @@ module.exports.checkmanage = async(req, res, next) => {
     var data = jwt.verify(token, process.env.passtoken);     
     var user_manage = await account.findOne({_id: data.id})
     user_manage.join.forEach(val =>{
-      if( val.role !== '-7'){
+      if( val.role !== -7){
         res.locals.user_manage = user_manage
-        next()
       }else{
         res.redirect('/manage/events')
       }
     })
   }else{
     res.redirect('/manage/login')
+    return true;
   } 
   next()
 }

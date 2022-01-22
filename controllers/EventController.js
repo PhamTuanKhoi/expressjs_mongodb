@@ -52,23 +52,13 @@ class EventController{
         var del = await Event.deleteOne({slug: req.query.slug})
         res.redirect('/manage/events')
     }
-    // async addPerson(req, res){
-    //     var event = await Event.find()
-    //     res.render('admin/admin', {page: 'addPerson', event})
-    // }
-    // savePerson(req, res){
-    //     const body = req.body
-    //     Event.updateOne({_id: req.body.id}, {$push: {personCharge:{
-    //         name: body.name,
-    //         position: body.position,
-    //         email: body.email,
-    //         phone: body.phone,
-    //         birthday: body.birthday,
-    //         gender: body.gender
-    //     }}})
-    //     .then(() => res.redirect('/manage/events/personCharge'))
-    //     .catch(err => console.log(err))
-    // }
+    async searchevent(req, res){
+        var key = req.body.key.trim()
+        var event = await Event.find({ name: {
+          $regex: new RegExp('^'+ key + '.*', 'i')  
+        }})
+        res.render('admin/pages/displayEventSrc', {event})
+    }
 }
 
 

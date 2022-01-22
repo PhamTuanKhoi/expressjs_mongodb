@@ -3,6 +3,8 @@ const router = express.Router()
 const DeputyController = require('../controllers/DeputyController')
 
 
+router.get('/eventsignchat',  DeputyController.eventsignchat)
+router.get('/manage-event-chat',  DeputyController.eventchat)
 router.get('/deletePosts',  DeputyController.deletePosts)
 router.get('/Details/delete',  DeputyController.deletedetails)
 router.post('/up-details',  DeputyController.updetails)

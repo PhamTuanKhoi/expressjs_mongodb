@@ -1,4 +1,6 @@
-<a  href="/manage/registerEvent/add-details" class="btn btn-primary position-fixed">Addde</a>
+<a  href="/manage/registerEvent/add-details" class="btn position-fixed" style="background-color: rgb(161, 228, 200);">
+    <i class="fa fa-plus-square" aria-hidden="true"> THÊM THÔNG TIN</i>
+</a>
 <%
     if(typeof details !== 'undefined'){
         details.forEach(val =>{
@@ -7,7 +9,7 @@
     <div class="col-12 mt-3 p-5 bg-white shadow rounded-3">
         <div class="col-12 row">
             <div class="col-1"></div>
-            <div class="fs-4 fw-bold text-center text-success col-10">INFORMATION DETAILS</div>
+            <div class="fs-4 fw-bold text-center text-success col-10">Thông tin chi tiết</div>
             <div class="col-1 text-end">
                 <a href="/manage/registerEvent/Details/update?slug=<%=val.slug%>"><i class="fa fa-pencil-square-o text-warning" aria-hidden="true"></i></a>
                 <a onclick="return option = confirm('Want to delete details <%=val.slug%> ?')" href="/manage/registerEvent/Details/delete?iddetails=<%=data._id%>&idevent=<%=val._id%>"><i class="fa fa-trash" aria-hidden="true"></i></a>

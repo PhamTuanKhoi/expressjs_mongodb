@@ -1,0 +1,118 @@
+<link rel="stylesheet" href="/css/client/chat.css">
+
+<div style="margin-top: -30px;" class="col-11 bg-white shadow rounded-3 row ms-4">
+    <div class="col-4" style="background-color:rgb(29, 163, 163)">
+        <%
+     if(typeof chatpersonCharge !== 'undefined'){ 
+        chatpersonCharge.forEach(data =>{
+             data.personCharge.forEach(val =>{
+                 if(val.userid.equals(user_manage._id)){
+        %>
+        <br>
+        <a href="/manage/registerEvent/eventsignchat?slug=<%=data.slug%>">
+            <p id="show" class="btn fw-bold text-secondary col-12" style="background-color: rgb(161, 228, 200);"><%=data.name%></p>
+        </a>
+        <%}})})}%>
+    </div>
+    <div class="col-8">
+        <% if(typeof eventsignchat !== 'undefined'){ %>
+        <div id="nameevent" class="col-12 text-center text-light fw-bold" style="background-color:rgb(29, 163, 163)">
+            <i><%=eventsignchat.slug%></i>
+        </div>
+        <input id="idshow" type="hidden" value="<%=eventsignchat.name%>">
+
+        <div class="scroll">
+            <ul id="messages">
+            </ul>
+        </div>
+        <form id="formRoom">
+            <% if(typeof user_manage !== 'undefined'){ %>
+            <input id="chatname" type="hidden" value="<%=user_manage.name%>">
+          <input  class="inputchat" id="messageRoom" type="text" placeholder="enter a message..." autocomplete="off" size="40">
+          <button class="btn btn-danger rounded-circle" id="send-chat">Send</button>
+          <% } %>
+      </form>
+      <% }else{ %>
+        <div class="fw-bold text-light col-12 btn"style="background-color:rgb(29, 163, 163);">Nhóm chat của bạn</div>
+        <img width="621px" src="https://www.rocketwp.com.br/wp-content/uploads/2019/03/plugins_chat_online_wordpress.jpg">
+      <%}%>
+    </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var socket = io();
+  
+    var chatform = document.querySelector('#formRoom');
+    var chatmess = document.querySelector('#messageRoom');
+    var chatname = document.querySelector('#chatname');
+    var eventname = document.querySelector('#nameevent');
+    var texteventname = eventname.innerText
+    var idshow = document.querySelector('#idshow')
+    var userchatload = idshow.value
+
+  
+  
+    chatform.addEventListener('submit', (e) => {
+      e.preventDefault(); // khong cho load form
+      const message = chatmess.value
+      const user = chatname.value
+      socket.emit(`chat event`, {message, user, texteventname});
+      chatmess.value = ''
+    });
+  
+    const diplaychat = document.querySelector('#messages')
+    
+    socket.on(`${texteventname}`, function(message) {
+        const chatname = document.createElement('i')
+        chatname.textContent = `${message.user}:`
+  
+        diplaychat.appendChild(chatname)
+
+        const chatitem = document.createElement('li')
+        chatitem.textContent = message.message
+  
+        diplaychat.appendChild(chatitem)
+  
+  
+    })
+  
+    socket.on(`${userchatload}`, function(msges) {
+        msges.chat.forEach(msg => {
+
+            const chatname = document.createElement('i')
+            chatname.textContent = `${msg.user}:`
+    
+            diplaychat.appendChild(chatname)
+
+            const chatitem = document.createElement('li')
+            chatitem.textContent = msg.message
+    
+            diplaychat.appendChild(chatitem)
+        });
+    })
+  </script>
+
+
+<!-- <style>
+    .sendchat{
+        background: #333; border: none; padding: 0 1rem; margin: 0.25rem; border-radius: 3px; outline: none; color: #fff;
+    }
+    #messages { list-style-type: none; margin: 0; padding: 0; }
+    #messages > li { padding: 0.5rem 1rem; text-align: end; font-style: italic; border-bottom: 1px solid rgb(240, 240, 243);
+                     /* border-radius: 30px; */
+                     /* width: 25rem; */
+                     /* margin-left: 40%; */
+                     color: rgb(132, 63, 196);
+                  
+                   }
+    #messages > li:nth-child(odd) { background: #efefef; }
+    #messages > i {
+        color: black;
+        margin-left: 6px;
+    }
+    .scroll{
+        height: 490px;
+        overflow-y: scroll;
+    }
+  </style> -->

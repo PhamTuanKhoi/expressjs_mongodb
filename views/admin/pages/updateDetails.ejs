@@ -5,7 +5,7 @@
                 <i class="fa fa-arrow-left" aria-hidden="true"></i>
             </a>
         </div>
-        <div class="fw-bold text-primary col-11 text-center ps-4">NEW POSTS</div>
+        <div class="fw-bold text-primary col-11 text-center ps-4">Cập nhật thông tin chi tiết</div>
     </div>
     <div class="card-body">
       <%
@@ -13,13 +13,13 @@
       %>
         <form action="/manage/registerEvent/up-details" method="post">
             <div class="mb-3 ps-5 text-primary pe-5">
-              <label class="form-label">Event</label>
+              <label class="form-label">Tên hoạt động:</label>
               <select name="id" class="form__input bg-light">
                 <option value="<%=updatedetails._id%>"><%=updatedetails.name%></option>
             </select>
             </div>
               <div class="mb-3 ps-5 text-primary pe-5">
-                <label class="form-label">Content</label>
+                <label class="form-label">Nội dung:</label>
                 <% updatedetails.details.forEach(data =>{ %>
                 <textarea name="content" id="editordetails"><%-data.content%></textarea>
                 <input type="hidden" name="iduser" value="<%=data.userid%>">
@@ -27,7 +27,7 @@
               </div>
               <!-- <input type="text" value="<%=new Date()%>"> -->
             <div class="text-center">
-                <button type="submit" class="btn btn-danger">Save <i class="fa fa-check-circle-o" aria-hidden="true"></i></button>
+                <button type="submit" class="btn btn-danger">Lưu <i class="fa fa-check-circle-o" aria-hidden="true"></i></button>
             </div>
           </form>
           <% } %>

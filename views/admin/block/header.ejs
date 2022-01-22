@@ -1,32 +1,42 @@
 <nav style="width: 100%;" class=" shadow bg-white position-fixed">
     <div class="row">
-      <div class="col-12 fs-5 text-uppercase bg-primary fw-bold d-flex text-white p-3 justify-content-center">Information Technology Club</div>
+      <div class="col-12 fs-5 text-uppercase bg-primary fw-bold d-flex text-white p-3 justify-content-center">CÂU LẠC BỘ CÔNG NGHỆ THÔNG TIN</div>
 
         <div class="col-6 d-flex justify-content-center">
           <img class="pe-5" src="/images/sv_logo_dashboard.png">
-          <form class="mt-1" action="">
+          <%
+              if( typeof user_manage !== 'undefined'){
+                user_manage.join.forEach(val =>{
+                  if(val.role === -7){
+          %>
+          <form class="mt-1">
             <div class="input-group border rounded-pill p-1">
-              <input type="search" placeholder="Tìm kiếm..." aria-describedby="button-addon4" class="form-control bg-none border-0">
+              <input name="name" type="search" placeholder="Tìm kiếm..." class="ip" id="keyeventadmin" onkeyup="searchadmin(this)" autocomplete="off">
               <div class="input-group-prepend border-0">
-                <button id="button-addon4" type="button" class="btn btn-link text-info"><i class="fa fa-search"></i></button>
+                <button id="button-addon4" type="submit" class="btn btn-link text-info"><i class="fa fa-search"></i></button>
               </div>
             </div>
           </form>
+          <% }})}%>
         </div>
 
         <div class="col-6  justify-content-center d-flex p-3">
           <a class="me-5" href=""><i class="fa fa-home" aria-hidden="true">Trang chủ</i></a>
+          <%  if(typeof user_manage !== 'undefined'){
+            user_manage.join.forEach(val =>{
+              if(val.role === -7){
+          %>
           <a class="me-5 position-relative"data-bs-toggle="modal" data-bs-target="#thongbao"><i class="fa fa-bell-o " aria-hidden="true"></i>
             <% 
             if( typeof role !== 'undefined' ){ 
-              role.forEach(users =>{
+              role.forEach((users, index) =>{
           %>
             <span class="position-absolute mb-2 translate-middle badge rounded-pill bg-danger">
-              <%= users.lenght %>
+              <%= index + 1 %>
             </span>
             <% })} %>
           </a>
-        
+          <% }})} %>
           <!-- ///////// -->
           <% if(typeof user_manage !== 'undefined'){ %>
           <img width="25px" height="25px" src="<%=user_manage.picture%>" class="rounded-pill">
@@ -73,7 +83,7 @@
             if( typeof roleTV !== 'undefined' ){ 
               roleTV.forEach(val =>{
                 val.join.forEach(data =>{
-                  if(data.role === '2'){
+                  if(data.role >= 2){
         %>
         <div class="d-flex p-2 border-bottom">
           <img width="30px" height="30px" class="rounded-circle" src="<%=val.picture%>">
@@ -93,4 +103,72 @@
     </div>
   </div>
 </div>
+
+
+<style>
+  .ip{
+    border: none;
+  }
+  .ip:focus{
+    outline: none;
+  }
+</style>
+<script>
+
+$("#keyeventadmin").keyup(function(){
+  var keyuser = $(this).val();
+  console.log(keyuser);
+    $.ajax({
+      async : false,
+      url : "/manage/events/searchevents",
+      type : "post",
+      dataType:"text",
+      data : {
+        key: keyuser
+      },
+      success : function (result){
+          $("#father").replaceWith(result)
+      },
+      error : function (error) {
+        alert("Dã xãy ra lỗi")
+      }
+  });
+});
+
+// function searchadmin(e){
+//   var keyuser = e.value;
+//   console.log(keyuser);
+//     $.ajax({
+//       async : false,
+//       url : "/manage/events/searchevents",
+//       type : "post",
+//       dataType:"text",
+//       data : {
+//         key: keyuser
+//       },
+//       success : function (result){
+//           $("#father").replaceWith(result)
+//       },
+//       error : function (error) {
+//         alert("Dã xãy ra lỗi")
+//       }
+//   });
+// }
+
+
+// $("#keyeventadmin").keyup(function(){
+//   var keyuser = $(this).val();
+//   fetch('/manage/events/searchevents',{
+//       method: "post",
+//       headers: { 'Content-Type': 'application/json' },
+//       body: JSON.stringify({key: keyuser})
+//     }).then(res => res.json()).then(data =>{
+//       var event = data.event;
+//       $("#father").replaceWith(event)
+//       return;
+//     })
+// })
+</script>
+
+
 

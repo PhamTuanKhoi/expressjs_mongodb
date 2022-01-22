@@ -3,7 +3,8 @@ const router = express.Router()
 const MemberController = require('../controllers/MemberController')
 
 
-// router.get('/registerEvent',  MemberController.registerEvent)
+router.post('/sendmember',  MemberController.sendmember)
+router.get('/delete-person',  MemberController.deletePerson)
 router.get('/chat',  MemberController.chat)
 router.post('/addPerson',  MemberController.addPerson)
 router.get('/personCharge',  MemberController.personCharge)

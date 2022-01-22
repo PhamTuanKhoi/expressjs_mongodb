@@ -19,7 +19,7 @@ const accountchema = new Schema({
     birthday: Date,
     gender: String,
     join: [{
-        role: String,
+        role: Number,
         joinday: { type: Date, default: Date.now() }
     }],
     posts: [{

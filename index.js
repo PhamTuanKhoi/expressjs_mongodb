@@ -26,6 +26,7 @@ require('dotenv').config()
 const moment = require('moment');
 
 const Chat = require('./models/chat')
+const Event = require('./models/eventModel')
 
 
 app.use(session({
@@ -59,9 +60,33 @@ io.on('connection', (socket) => {
   socket.on('on-chat', (data) => {
       var chat = new Chat({chat: data})
       chat.save()
-      .then(() => { io.emit('userchat', data) })
+      .then(() => { 
+        io.emit('userchat', data) 
+      })
   })
 });
+
+io.on('connection', (socket) => {
+
+  Event.find({}, (err, value)=>{
+    if(err) console.log(err);
+    value.forEach(row =>{
+      socket.emit(`${row.name}`, row) 
+    })
+  })
+
+socket.on('chat event', (data) => {
+
+  Event.updateOne({slug: data.texteventname}, {$push:{chat:{
+    user: data.user,
+    message: data.message
+  }}}, err =>{
+    if(err) console.log(err);
+    io.emit(`${data.texteventname}`, data) 
+  })
+})
+});
+
 
 //ckediter upfile
 app.post('/upload',multipartMiddleware,(req,res)=>{
@@ -90,6 +115,14 @@ app.post('/upload',multipartMiddleware,(req,res)=>{
 })
 
 appRouter(app)
+
+// app.get('/pages/chat/eventsign', (req, res)=>{
+//   io.on('connection', (socket) => {
+//     socket.on('du-hoc-germany', (msg) => {
+//         io.emit('chatmessage', msg);
+//       });
+//   });  
+// })
 
 
 // let Event = require('./models/eventModel')

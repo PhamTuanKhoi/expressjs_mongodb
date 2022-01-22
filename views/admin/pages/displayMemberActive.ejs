@@ -1,15 +1,15 @@
 <div class=" bg-white col-12 shadow">
-    <div class="fw-bold card-header bg-white text-primary col-12 text-center fs-4"><i>Active Member</i></div>
+    <div class="fw-bold card-header bg-white text-primary col-12 text-center fs-4"><i>Thành viên năng nổ</i></div>
     <div class="card-body">
       <table class="table table-hover text-center">
         <thead>
           <tr>
             <th scope="col"></th>
             <th scope="col">#</th>
-            <th scope="col">Name</th>
+            <th scope="col">Họ tên</th>
             <th scope="col">Mssv</th>
-            <th scope="col">Age</th>
-            <th scope="col">Participated</th>
+            <th scope="col">Tuổi</th>
+            <th scope="col">Xếp hạng</th>
           </tr>
         </thead>
         <% 
@@ -29,7 +29,7 @@
             <td><%=data.mssv%></td>      
             <td><%=date - new Date(data.birthday).getFullYear()%></td>   
             <% data.join.forEach(val =>{ %>   
-            <td><%=val.role - 2%></td>     
+            <td class="bg-danger text-white fw-bold"><%=val.role - 2%></td>     
             <%})%> 
             <td>
               <a href="/manage/events/upload?slug=<%=data.slug%>" class="text-warning btn-sm btn-outline-light fs-4"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>

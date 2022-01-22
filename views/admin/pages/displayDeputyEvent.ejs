@@ -1,7 +1,7 @@
 
 
 <div class=" bg-white col-12">
-  <p class="fw-bold text-danger">Limited registration:</p>
+  <p class="fw-bold text-danger">Hạn đăng ký tham gia hoạt động:</p>
   <div class="d-flex col-12 p-2">
     <select id="idevent" class="form__input me-3 bg-light">
       <option ></option>
@@ -14,7 +14,7 @@
     </select>
     <input id="time" type="datetime-local" class="form__input me-3 bg-light">
     <div class="col-1">
-      <p onclick="limited()" class="btn btn-secondary">save</p>
+      <p onclick="limited()" class="btn btn-secondary">Lưu</p>
     </div>
   </div>
 </div> <br>
@@ -37,18 +37,18 @@
 </script>
 
 <div class=" bg-white col-12 shadow">
-    <div class="fw-bold card-header bg-white text-primary col-12 text-center fs-4"><i>MANAGE EVENT</i></div>
+    <div class="fw-bold card-header bg-white text-primary col-12 text-center fs-4"><i>Quản lý hoạt động</i></div>
     <div class="card-body">
       <table class="table table-hover text-center">
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Member</th>
-            <th scope="col">Fee</th>
-            <th scope="col">Start Day</th>
-            <th scope="col">End Day</th>
-            <th scope="col">Limited</th>
+            <th scope="col">Tên hoạt động</th>
+            <th scope="col">Số lượng</th>
+            <th scope="col">Phí</th>
+            <th scope="col">Bắt đầu</th>
+            <th scope="col">Kết thúc</th>
+            <th scope="col">Hạn đăng ký</th>
           </tr>
         </thead>
         <% 
@@ -66,7 +66,7 @@
             <td class="text-success"><%= moment(data.startday).format('Do/MM/YYYY (HH:mm:ss) ') %></td>
             <td class="text-success"><%= moment(data.endday).format('Do/MM/YYYY (HH:mm:ss) ') %></td>
             <% if( data.limitedRegister !== date){ %>
-              <td class="text-secondary"><%= moment(data.limitedRegister).format('Do/MM/YYYY (HH:mm:ss) ') %></td>
+              <td style="color: rgb(238, 236, 236)" class="bg-danger"><%= moment(data.limitedRegister).format('Do/MM/YYYY (HH:mm:ss) ') %></td>
             <% }else{ %>
               <td class="text-danger">NOT FOUD</td>
             <%}%>

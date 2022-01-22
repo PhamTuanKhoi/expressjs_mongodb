@@ -5,12 +5,12 @@
                 <i class="fa fa-arrow-left" aria-hidden="true"></i>
             </a>
         </div>
-        <div class="fw-bold text-primary col-11 text-center ps-4">NEW POSTS</div>
+        <div class="fw-bold text-primary col-11 text-center ps-4">Cập nhật bài viết</div>
     </div>
     <div class="card-body">
         <form action="/manage/posts/up" method="post">
             <div class="mb-3 ps-5 text-primary pe-5">
-              <label class="form-label">Event</label>
+              <label class="form-label">Tên sự kiện:</label>
               <select name="id" class="form-control bg-light">
                 <% if(typeof eventone !== 'undefined'){ %>
                 <option class="fst-italic text-danger fw-bold" value="<%=eventone._id%>"><%=eventone.name%></option>
@@ -28,14 +28,14 @@
                   data.posts.forEach(val =>{
             %>
               <div class="mb-3 ps-5 text-primary pe-5">
-                <label class="form-label">Content</label>
-                <textarea name="posts" id="editor1" aria-valuetext="<%-val.content%>"></textarea>
+                <label class="form-label">Mô tả</label>
+                <textarea name="posts" id="editor1" ><%-val.content%></textarea>
               </div>
-              <input name="_id" type="text" value="<%=val._id%>">
+              <input name="_id" type="hidden" value="<%=val._id%>">
             <% })} %>
               <!-- <input type="text" value="<%=new Date()%>"> -->
             <div class="text-center">
-                <button type="submit" class="btn btn-danger">Save <i class="fa fa-check-circle-o" aria-hidden="true"></i></button>
+                <button type="submit" class="btn btn-danger">Lưu <i class="fa fa-check-circle-o" aria-hidden="true"></i></button>
             </div>
           </form>
     </div>

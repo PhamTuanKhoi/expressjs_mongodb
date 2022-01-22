@@ -1,12 +1,12 @@
 
 
 <div style="margin-top: -40px;" class="shadow col-12">
-    <div class="col-12 fs-2 text-white text-center bg-secondary">Send Email</div>
+    <div class="col-12 fs-2 text-white text-center bg-secondary">Gửi Email</div>
     <div class="col-12 row">
         <div class="col-4 pt-1">
-            <p class="btn btn-danger col-12" onclick="chatarray()">Send all group</p>
-            <p class="btn btn-danger col-12" onclick="chatevent()">Send event</p>
-            <p class="btn btn-danger col-12" onclick=" chatsingle()">Sent single</p>
+            <p class="btn btn-danger col-12" onclick="chatarray()">Tất cả thành viên</p>
+            <p class="btn btn-danger col-12" onclick="chatevent()">Thành viên của sự kiện</p>
+            <p class="btn btn-danger col-12" onclick=" chatsingle()">Thành viên</p>
         </div>
         <div class="col-8 pt-1">
             <div class="col-12 border-bottom fw-bole text-white text-center bg-primary rounded-pill">Thư mới</div>
@@ -20,7 +20,7 @@
             </div>
             <div id="content2" class="mt-1">
                 <select id="id" class="form__input">
-                    <option >---</option>
+                    <option class="bg-primary">Chọn hoạt động:</option>
                 <% 
                     if(typeof data !== 'undefined'){ 
                         data.forEach(val =>{
@@ -35,7 +35,23 @@
                 </div>
             </div>
             <div id="content1">
-                say hi <a href="https://freetuts.net" title="học lập trình">freetuts.net</a>
+                <div id="content" class="mt-1">
+                    <select id="emailmember" class="form__input">
+                        <option class="bg-primary">Chọn thành viên:</option>
+                        <% 
+                        if(typeof usereml !== 'undefined'){ 
+                            usereml.forEach(value =>{
+                                if(value.name !== 'CTUET'){
+                        %>
+                        <option value="<%=value.email%>"><%=value.name%></option>
+                        <% }})} %>
+                    </select>
+                    <input id="thememember" type="text" class="form__input" placeholder="Chủ đề:">
+                    <textarea id="contentmember" class="form__input" cols="30" rows="10" placeholder="Nội dung:"></textarea>
+                    <div class="text-end">
+                        <a onclick="sendmember()" class="btn btn-primary">Send <i class="fa fa-paper-plane-o" aria-hidden="true"></i></a>
+                    </div>
+                </div>
             </div>
             <br/>
         </div>
@@ -65,6 +81,21 @@
                          themeevent : $('#themeevent').val(),
                          contentevent : $('#contentevent').val(),
                          id : $('#id').val()
+                    },
+                    success : function (result){
+                        alert(result)
+                    }
+                });
+            }
+    function sendmember(){
+                $.ajax({
+                    url : "/manage/members/sendmember",
+                    type : "post",
+                    dataType:"text",
+                    data : {
+                        emailmember : $('#emailmember').val(),
+                        thememember : $('#thememember').val(),
+                        contentmember : $('#contentmember').val(),
                     },
                     success : function (result){
                         alert(result)

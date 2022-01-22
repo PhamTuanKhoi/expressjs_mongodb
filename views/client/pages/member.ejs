@@ -1,0 +1,17 @@
+<div class="col-12 mt-3 p-5 bg-white shadow rounded-3">
+    <%
+        if(typeof members !== 'undefined'){ 
+    %>
+    <p class="text-center fw-bold">+ <%=members.length - 1%> members...</p> <hr>
+    <% 
+        members.forEach(data =>{ 
+            if(data.name !== 'CTUET'){
+    %>
+    <div class="row">
+        <div class="col-2">
+            <img class="rounded-circle" width="60px" src="<%=data.picture%>" alt="">
+        </div>
+        <div class="col-9 mt-3 fw-bold text-primary"><%=data.name%></div>
+    </div> <br>
+    <%}})}%>
+</div>

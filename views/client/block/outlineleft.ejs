@@ -1,24 +1,59 @@
-<div id="mySidenav" class="sidenav bg-primary">
-
-    <a class="border-bottom" data-toggle="collapse" href="#tc">About</a>
+<div id="mySidenav" class="sidenav menu">
+    <a class="border-bottom" style="background: rgb(2, 45, 136);"href="/pages/home">
+      <i class="fa fa-home" aria-hidden="true">Trang chủ</i>
+    </a>
     
-    <a class="border-bottom" href="#posts" data-toggle="collapse"><i class="fa fa-bookmark-o" aria-hidden="true"></i>&nbsp;Posts</i></a>
+    <a class="border-bottom" href="#posts" data-toggle="collapse">
+     <img width="30px" src="/images/icon/baiviet.png" alt="">
+      &nbsp;Bài viết
+    </a>
     <a href="/pages/posts" class="border-bottom collapse bg-info" id="posts">&nbsp;
-      <i class="fa fa-bookm">&nbsp;.CLB is posts</i>
+      <i class="fa fa-bookm">&nbsp;.Bài viết CLB</i>
     </a>
     <a href="/pages/memberpost" class="border-bottom collapse bg-info" id="posts">&nbsp;
-      <i class="fa fa-bookm">&nbsp;.Member is posts</i>
+      <i class="fa fa-bookm">&nbsp;.Bài viết thành viên</i>
     </a>
-    <a class="border-bottom" href="/pages/home"><i class="fa fa-gift" aria-hidden="true">&nbsp;Event</i></a>
-    <a class="border-bottom" href="/pages/posting"><i class="fa fa-external-link" aria-hidden="true">&nbsp;Post an article</i></a>
+    <a class="border-bottom" href="/pages/home">
+      <img width="30px" src="/images/icon/sukien-removebg-preview.png" alt="">
+      &nbsp;Sự kiện
+    </a>
+    <a class="border-bottom" href="/pages/posting">
+      <img width="30px" src="/images/icon/chiase-removebg-preview.png" alt="">
+      &nbsp;Chia sẽ cá nhân
+    </a>
     <% if(typeof user !== 'undefined'){ %>
-      <a class="border-bottom" href="/pages/debt"><i class="fa fa-cc-diners-club" aria-hidden="true">&nbsp;student debt</i></a>
+      <a class="border-bottom" href="/pages/debt">
+        <img width="30px" src="/images/icon/icon-mua-no-removebg-preview.png" alt="">
+        &nbsp;Công nợ thành viên
+      </a>
     <% }else{ %>
-      <a class="border-bottom" href="#"><i class="fa fa-cc-diners-club" aria-hidden="true">&nbsp;student debt</i></a>
+      <a class="border-bottom" href="#">
+        <img width="30px" src="/images/icon/icon-mua-no-removebg-preview.png" alt="">
+        &nbsp;Công nợ thành viên
+      </a>
     <% } %>
-    <a class="border-bottom" href="#"><i class="fa fa-users" aria-hidden="true">&nbsp;Members</i></a>
+    <a class="border-bottom" href="/pages/members">
+      <img width="30px" src="/images//icon/thanhvien.png" alt="">
+      &nbsp;Thành viên
+    </a>
+    <% if(typeof user !== 'undefined'){ %>
+      <div class="hotline-phone-ring-wrap">
+        <div class="hotline-phone-ring">
+          <div class="hotline-phone-ring-circle"></div>
+          <div class="hotline-phone-ring-circle-fill"></div>
+          <div style="margin-left: -10px;" class="hotline-phone-ring-img-circle">
+            <a href="/pages/chat" class="pps-btn-img">
+              <img width="70px" src="https://icon-library.com/images/chat-icon-png/chat-icon-png-22.jpg">
+            </a> 
+            <span style="margin-top: -30px; margin-left: 120px;" class="position-absolute translate-middle badge rounded-pill bg-danger fw-bold">
+              99+
+            </span>
+          </div> 
+        </div>
+      </div>
+    <%}%>
 </div>
-  
+
   <!-- <script>
   function openNav() {
     document.getElementById("mySidenav").style.width = "17rem";

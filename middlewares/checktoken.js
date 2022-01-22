@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken')
 const account = require('../models/accountModel')
 const Event = require('../models/eventModel')
 const moment = require("moment");
+const { consumers } = require('nodemailer/lib/xoauth2');
 
 function checktoken(app){
 
@@ -30,11 +31,25 @@ function checktoken(app){
       next()
     })
     app.use(async function (req, res, next) {
+      if(typeof req.cookies.token !== 'undefined'){
+        const token = req.cookies.token
+        var data = jwt.verify(token, process.env.passtoken);     
+        const user = await account.findOne({sub: data.sub})
+        const eventsign = await Event.find({"registerEvent.userid": user._id})
+        res.locals.eventsign = eventsign
+      }  
+      next()
+    })
+    app.use(async function (req, res, next) {
         if(typeof req.cookies.token !== 'undefined'){
           const token = req.cookies.token
           var data = jwt.verify(token, process.env.passtoken);     
           const user = await account.findOne({sub: data.sub})
-          res.locals.user = user
+          if( user.report === -2 ){
+            res.clearCookie('token')
+          }else{
+            res.locals.user = user
+          }
         }  
         next()
       })

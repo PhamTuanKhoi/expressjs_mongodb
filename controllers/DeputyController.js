@@ -10,7 +10,10 @@ const account = require('../models/accountModel')
 
 class PostsController{
     async display(req, res){
-        const data = await Event.find()
+        // const data = await Event.find()
+        const token = req.cookies.tokenmanage
+        var user = jwt.verify(token, 'shhhhh');    
+        var data = await Event.find({"personCharge_look": user.id})
         res.render('admin/admin', {page: 'displayPosts', data})
     }
     async addPost(req, res){
@@ -243,6 +246,13 @@ class PostsController{
             }}
         })
         res.redirect('/manage/posts')
+    }
+    async eventchat(req, res){
+        res.render('admin/admin', {page: 'displayChatEvent'})
+    }
+    async eventsignchat(req, res){
+        var eventsignchat = await Event.findOne({slug: req.query.slug})
+        res.render('admin/admin', {page: 'displayChatEvent', eventsignchat})
     }
 }
 module.exports = new PostsController

@@ -1,0 +1,93 @@
+
+
+<div class="col-12 bg-white shadow rounded-3 row">
+    <div class="col-4" style="background-color:rgb(29, 163, 163)"> 
+        <br>
+        <a href="/pages/chat">
+            <p class="btn fw-bold text-secondary col-12" style="background-color: rgb(161, 228, 200);">Tất cả thành viên</p>
+        </a>
+        <%
+     if(typeof eventsign !== 'undefined'){ 
+         eventsign.forEach(data =>{
+             data.registerEvent.forEach(val =>{
+                 if(val.userid.equals(user._id) && val.pay === true){
+        %>
+        <a href="/pages/chat/eventsign?slug=<%=data.slug%>">
+            <p id="show" class="btn fw-bold text-secondary col-12" style="background-color: rgb(161, 228, 200);"><%=data.name%></p>
+        </a>
+        <%}})})}%>
+    </div>
+    <div class="col-8">
+        <% if(typeof eventchat !== 'undefined'){ %>
+        <div id="nameevent" class="col-12 text-center text-light fw-bold" style="background-color:rgb(29, 163, 163)"><i><%=eventchat.slug%></i></div>
+        <input id="idshow" type="hidden" value="<%=eventchat.name%>">
+        <%}%>
+        <div class="scroll">
+            <ul id="messages">
+            </ul>
+        </div>
+        <form id="formRoom">
+            <% if(typeof user !== 'undefined'){ %>
+            <input id="chatname" type="hidden" value="<%=user.name%>">
+          <input  class="inputchat" id="messageRoom" type="text" placeholder="enter a message..." autocomplete="off" size="40">
+          <button class="btn btn-danger rounded-circle" id="send-chat">Send</button>
+          <% } %>
+      </form>
+    </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var socket = io();
+  
+    var chatform = document.querySelector('#formRoom');
+    var chatmess = document.querySelector('#messageRoom');
+    var chatname = document.querySelector('#chatname');
+    var eventname = document.querySelector('#nameevent');
+    var texteventname = eventname.innerText
+    var idshow = document.querySelector('#idshow')
+    var userchatload = idshow.value
+
+  
+  
+    chatform.addEventListener('submit', (e) => {
+      e.preventDefault(); // khong cho load form
+      const message = chatmess.value
+      const user = chatname.value
+      socket.emit(`chat event`, {message, user, texteventname});
+      chatmess.value = ''
+    });
+  
+    const diplaychat = document.querySelector('#messages')
+    
+    socket.on(`${texteventname}`, function(message) {
+        const chatname = document.createElement('i')
+        chatname.textContent = `${message.user}:`
+  
+        diplaychat.appendChild(chatname)
+
+        const chatitem = document.createElement('li')
+        chatitem.textContent = message.message
+  
+        diplaychat.appendChild(chatitem)
+  
+  
+    })
+  
+    socket.on(`${userchatload}`, function(msges) {
+        msges.chat.forEach(msg => {
+
+            const chatname = document.createElement('i')
+            chatname.textContent = `${msg.user}:`
+    
+            diplaychat.appendChild(chatname)
+
+            const chatitem = document.createElement('li')
+            chatitem.textContent = msg.message
+    
+            diplaychat.appendChild(chatitem)
+        });
+    })
+  </script>
+
+

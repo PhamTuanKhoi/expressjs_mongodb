@@ -1,11 +1,11 @@
-<div class="col-12 mt-3 p-5 bg-white shadow rounded-3">
-    <%
-        if(typeof viewdetails !== 'undefined'){
-            var date = new Date().getFullYear()
-            viewdetails.forEach(data =>{
-                data.details.forEach(value =>{
+<%
+if(typeof viewdetails !== 'undefined'){
+    var date = new Date().getFullYear()
+    viewdetails.forEach(data =>{
+        data.details.forEach(value =>{
 
-    %>
+%>
+<div class="col-12 mt-3 p-5 shadow rounded-3">
 <!-- bien dem -->
 <%
 var count = 0
@@ -16,16 +16,16 @@ data.registerEvent.forEach(val =>{
 })
 %>
 <!-- - -->
-    <div class="fs-4 fw-bold text-center text-success">INFORMATION DETAILS</div>
+    <div class="fs-4 fw-bold text-center text-danger">Thông Tin <%=data.name%></div>
     <div class="mt-4 text-secondary"><%-value.content%></div>
-    <div class="text-primary ">
+    <div class="text-secondary ">
         <p class="text-primary fw-bold">Thông tin chi tiết:</p>
-        <p>Tên hoạt động: <%=data.name%>.</p>
-        <p>Số lượng đã đăng ký: <%=count%>/<%=data.number%></p>  
-        <p>Phí: <%=data.fee%> USD.</p>
-        <p>Sinh viên tham dự từ năm <%=data.limitAge%> trở lên.</p>
-        <p>Ngày bắt đầu: <%=moment(data.startday).format('Do/MM/YYYY (HH:mm:ss)')%>.</p>
-        <p>Ngày kết thúc: <%=moment(data.endday).format('Do/MM/YYYY (HH:mm:ss)')%>.</p>
+        <p>Tên hoạt động: <span class="fw-bold"><%=data.name%>.</span></p>
+        <p>Số lượng đã đăng ký: <span class="fw-bold"><%=count%>/<%=data.number%>.</span></p>  
+        <p>Phí: <span class="fw-bold"><%=data.fee%> USD.</span></p>
+        <p>Sinh viên tham dự từ năm <span class="fw-bold"><%=data.limitAge%> trở lên.</span></p>
+        <p>Ngày bắt đầu: <span class="fw-bold"><%=moment(data.startday).format('Do/MM/YYYY (HH:mm:ss)')%>.</span></p>
+        <p>Ngày kết thúc: <span class="fw-bold"><%=moment(data.endday).format('Do/MM/YYYY (HH:mm:ss)')%>.</span></p>
     </div>
     <div>
         <div class="card-header text-center">Thông tin người phụ trách</div>
@@ -53,9 +53,10 @@ data.registerEvent.forEach(val =>{
             </tbody>
           </table>
     </div>
-    
-<% })})} %>
+    <div>Đăng ký hoạt động <%=data.name%> <a href="/pages/event?slug=<%=data.slug%>">tại đây.</a></div>
 </div>
+<br>
+<% })})} %>
 
  
 

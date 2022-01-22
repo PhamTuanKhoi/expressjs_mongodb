@@ -1,18 +1,18 @@
 <div class=" bg-light col-12 fst-italic shadow">
     <div class="d-flex">
         <div class="">
-            <a href="/manage/posts" class="btn-sm btn-primary me-2 rounded-circle">
+            <a href="/manage/registerEvent/Details" class="btn-sm btn-primary me-2 rounded-circle">
                 <i class="fa fa-arrow-left" aria-hidden="true"></i>
             </a>
         </div>
-        <div class="fw-bold text-primary col-11 text-center ps-4">NEW POSTS</div>
+        <div class="fw-bold text-primary col-11 text-center ps-4">Thêm thông tin chi tiết</div>
     </div>
     <div class="card-body">
         <form action="/manage/registerEvent/add-details" method="post">
             <div class="mb-3 ps-5 text-primary pe-5">
-              <label class="form-label">Event</label>
+              <label class="form-label">Tên hoạt động:</label>
               <select name="id" class="form-control bg-light">
-                <option class=""><i class="fa fa-caret-down" aria-hidden="true">_____</i></option>
+                <option class=""><i class="fa fa-caret-down" aria-hidden="true"></i></option>
               <%
                  if(typeof eventDetails !== 'undefined'){
                   eventDetails.forEach(val =>{ 
@@ -22,12 +22,12 @@
             </select>
             </div>
               <div class="mb-3 ps-5 text-primary pe-5">
-                <label class="form-label">Content</label>
+                <label class="form-label">Nội dung:</label>
                 <textarea name="content" id="editor1"></textarea>
               </div>
               <!-- <input type="text" value="<%=new Date()%>"> -->
             <div class="text-center">
-                <button type="submit" class="btn btn-danger">Save <i class="fa fa-check-circle-o" aria-hidden="true"></i></button>
+                <button type="submit" class="btn btn-danger">Lưu <i class="fa fa-check-circle-o" aria-hidden="true"></i></button>
             </div>
           </form>
     </div>

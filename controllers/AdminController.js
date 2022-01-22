@@ -38,7 +38,7 @@ class AdminController{
           }
         if(data){ 
           data.join.forEach(user => {
-            if(user.role === '-7'){
+            if(user.role === -7){
               var older_token = jwt.sign({ id: data._id}, process.env.passtoken); //{ expiresIn: 30*60}
               res.cookie('tokenmanage', older_token)  
               res.redirect('/manage/events')
